@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr_len.c                                    :+:      :+:    :+:   */
+/*   ft_strcnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/20 12:44:50 by zraunio           #+#    #+#             */
-/*   Updated: 2021/01/20 12:47:44 by zraunio          ###   ########.fr       */
+/*   Created: 2021/02/05 11:47:39 by zraunio           #+#    #+#             */
+/*   Updated: 2021/02/05 12:46:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-size_t		ft_strstr_len(const char *haystack, const char *needle)
+char	*ft_strcnew(size_t size, char c)
 {
-	size_t	j;
-	size_t	k;
+	char	*str;
+	size_t	i;
 
-	j = 0;
-	if (needle[j] == '\0')
-		return (0);
-	while (haystack[j] != '\0')
+	i = 0;
+	if (!(str = (char*)malloc(sizeof(*str) * (size + 1))))
+		return (NULL);
+	while (i < size)
 	{
-		k = 0;
-		while (needle[k] == haystack[j + k])
-		{
-			k++;
-			if (needle[k] == '\0')
-				return (j);
-		}
-		j++;
+		str[i] = c;
+		i++;
 	}
-	return (0);
+	str[i] = '\0';
+	return (str);
 }

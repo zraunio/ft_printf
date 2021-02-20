@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/27 10:47:16 by zraunio           #+#    #+#              #
-#    Updated: 2021/01/27 10:49:53 by zraunio          ###   ########.fr        #
+#    Updated: 2021/02/19 12:52:02 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ NAME = ft_printf
 
 SRCS = 	convert.c \
 		ft_printf.c \
-		parse.c 
+		parse.c\
+		diu.c \
+		oxX.c \
+		test_main.c 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,4 +41,4 @@ re: fclean all
 
 $(NAME): $(OBJS)
 	make -C libft
-	gcc -Wall -Wextra -Werror $(SRCS) $(LIBNAME) -I $(HDR) -o $(NAME)
+	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIBNAME) -I $(HDR) -o $(NAME)

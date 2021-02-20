@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 10:46:20 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/01 14:19:03 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/11 14:35:08 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char		*ft_itoa(int n)
 {
 	int		num;
-	int		dig;
 	char	*s;
 
 	num = ft_count_digit(n);
@@ -23,17 +22,16 @@ char		*ft_itoa(int n)
 		return (NULL);
 	if (n < 0)
 	{
-		n = -n;
 		s[0] = '-';
+		if (n == -2147483648)
+			n = -2147483647;
+		n *= -1;
 	}
-	s[num + 1] = '\0';
-	if (n == 0)
-		s[num] = '0';
-	while (n)
+	s[num--] = '\0';
+	while (num >= 0 && s[num] != '-')
 	{
-		dig = n % 10;
-		s[num--] = ft_abs(dig) + '0';
-		n = n / 10;
+		s[num--] = (char)(n % 10 + '0');
+		n /= 10;
 	}
 	return (s);
 }

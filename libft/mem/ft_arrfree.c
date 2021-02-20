@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 14:15:24 by zraunio           #+#    #+#             */
-/*   Updated: 2021/01/29 14:17:16 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/18 11:41:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void		ft_arr_free(char **arr)
 	size_t	i;
 
 	i = 0;
-	while (arr)
+	while (arr[i])
 	{
-		free(arr[i]);
+		if (arr[i])
+			free(arr[i]);
 		i++;
 	}
 	ft_memdel((void*)&arr);

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/01 14:49:33 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/12 13:12:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int					ft_isalnum(int n);
 */
 size_t				ft_abs(long int value);
 float				ft_float_abs(float value);
-int					ft_wdcounter(char const *str, char c);
+size_t				ft_wdcounter(char const *str, char c);
 int					dig_count_base(unsigned long int nb, unsigned long int base);
-int					ft_count_digit(unsigned long int nb);
-size_t				ft_strstr_len(const char *haystack, const char *needle);
+int					ft_count_digit(long int nb);
+size_t				ft_strstr_start(const char *haystack, const char *needle);
 /*
 ** convertions
 */
@@ -61,6 +61,8 @@ char				*ft_lutoa(unsigned long int nb);
 char				*ft_utoa(unsigned long int n);
 char				*ft_utoa_base(unsigned long int nb, unsigned long int base);
 double				ft_atof(const char *str);
+char				*ft_litoa(long long int n);
+char				*ft_ftoa(long double d, size_t decimal);
 /*
 ** list
 */
@@ -107,6 +109,7 @@ char				*ft_strctrim(char const *s, char c);
 char				*ft_strtrim_top(const char *s, char c);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strnew(size_t size);
+char				*ft_strcnew(size_t size, char c);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));

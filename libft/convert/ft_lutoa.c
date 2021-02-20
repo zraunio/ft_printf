@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:02:52 by zraunio           #+#    #+#             */
-/*   Updated: 2021/01/11 10:25:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/05 14:43:15 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char		*ft_lutoa(unsigned long int nb)
 		res[0] = '0';
 	while (nb != 0 && len >= 0)
 	{
-		res[len-- - 1] = nb % 10 + 48;
+		res[len-- - 1] = nb % 10 + '0';
 		nb = nb / 10;
 	}
 	return (res);

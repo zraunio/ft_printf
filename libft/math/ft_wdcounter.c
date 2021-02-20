@@ -6,16 +6,16 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:38:24 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/01 13:33:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/04 11:48:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int		ft_wdcounter(char const *str, char c)
+size_t		ft_wdcounter(char const *str, char c)
 {
-	int i;
-	int words;
+	int		i;
+	size_t	words;
 
 	words = 1;
 	i = 0;

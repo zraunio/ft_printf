@@ -17,6 +17,8 @@ SRC =  	ascii/ft_isalnum.c \
 		convert/ft_utoa_base.c \
 		convert/ft_utoa.c \
 		convert/ft_atof.c \
+		convert/ft_litoa.c \
+		convert/ft_ftoa.c \
 		list/ft_lstadd.c \
 		list/ft_lstdel.c \
 		list/ft_lstdelone.c \
@@ -28,7 +30,7 @@ SRC =  	ascii/ft_isalnum.c \
 		math/ft_abs.c \
 		math/ft_float_abs.c \
 		math/ft_wdcounter.c \
-		math/ft_strstr_len.c \
+		math/ft_strstr_start.c \
 		mem/ft_bzero.c \
 		mem/ft_memalloc.c \
 		mem/ft_memccpy.c \
@@ -74,6 +76,7 @@ SRC =  	ascii/ft_isalnum.c \
 		str/ft_strncmp.c \
 		str/ft_strnequ.c \
 		str/ft_strnew.c \
+		str/ft_strcnew.c \
 		str/ft_strnstr.c \
 		str/ft_strnstr.c \
 		str/ft_strrchr.c \

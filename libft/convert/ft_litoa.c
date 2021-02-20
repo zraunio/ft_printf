@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putdouble.c                                     :+:      :+:    :+:   */
+/*   ft_litoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/20 14:17:13 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/18 14:13:14 by zraunio          ###   ########.fr       */
+/*   Created: 2021/02/12 12:55:46 by zraunio           #+#    #+#             */
+/*   Updated: 2021/02/12 13:00:03 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_putdouble(long double f, int decimal)
+char		*ft_litoa(long long int n)
 {
-	long double	d;
+	int		num;
+	char	*s;
 
-	ft_putlong((long)f);
-	if (decimal == 0)
-		return ;
-	if (decimal >= 20)
-		decimal = 19;
-	f -= (long)f;
-	if (f < 0)
-		f *= -1;
-	ft_putchar('.');
-	while (decimal-- > 0)
-		f *= 10;
-	d = f;
-	if ((d = (d * 10) - f) >= 5)
-		f += 1;
-	ft_putlong((long)f);
+	num = ft_count_digit(n);
+	if (!(s = (char*)malloc(sizeof(char) * num + 2)))
+		return (NULL);
+	if (n < 0)
+	{
+		s[0] = '-';
+		if (n == -9223372036854775807 - 1)
+			n = -9223372036854775807;
+		n *= -1;
+	}
+	s[num--] = '\0';
+	while (num >= 0 && s[num] != '-')
+	{
+		s[num--] = (char)(n % 10 + '0');
+		n /= 10;
+	}
+	return (s);
 }
