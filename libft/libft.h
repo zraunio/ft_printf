@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/12 13:12:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/01 16:30:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int					ft_isalnum(int n);
 */
 size_t				ft_abs(long int value);
 float				ft_float_abs(float value);
+unsigned long int	ft_long_abs(long long int value);
 size_t				ft_wdcounter(char const *str, char c);
-int					dig_count_base(unsigned long int nb, unsigned long int base);
+int					dig_count_base(unsigned long int nb,
+					unsigned long int base);
 int					ft_count_digit(long int nb);
 size_t				ft_strstr_start(const char *haystack, const char *needle);
 /*
@@ -55,14 +57,17 @@ char				*ft_itoa(int n);
 int					ft_atoi(const char *str);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-char				*ft_itoa_base(unsigned long int nb, unsigned long int base);
-char				*ft_lutoa_base(unsigned long int nb, unsigned long int base);
+char				*ft_itoa_base(unsigned long int nb,
+					unsigned long int base);
+char				*ft_lutoa_base(unsigned long long int nb,
+					unsigned long int base);
 char				*ft_lutoa(unsigned long int nb);
 char				*ft_utoa(unsigned long int n);
 char				*ft_utoa_base(unsigned long int nb, unsigned long int base);
 double				ft_atof(const char *str);
 char				*ft_litoa(long long int n);
 char				*ft_ftoa(long double d, size_t decimal);
+char				*ft_sizetoa(size_t nb);
 /*
 ** list
 */
@@ -78,11 +83,13 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_memdel(void **ap);
 void				*ft_memalloc(size_t size);
 void				*ft_memset(void *s, int c, size_t n);
-void				*ft_memmove(void *dest, const void *src, size_t n);
+void				*ft_memmove(void *dest, const void *src,
+					size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
-void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
+void				*ft_memccpy(void *dest, const void *src, int c,
+					size_t n);
 void				*ft_realloc(void *ptr, size_t size);
 void				ft_bzero(void *s, size_t n);
 void				ft_arr_free(char **arr);
@@ -134,6 +141,5 @@ size_t				ft_strlcat(char *dest, const char *src, size_t n);
 char				*ft_strcpy(char *dest, const char *src);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strtrim_end(const char *s, char c);
-
 
 #endif

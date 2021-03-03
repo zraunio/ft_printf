@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 10:46:20 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/11 14:35:08 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/02 16:03:37 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@ char		*ft_itoa(int n)
 	num = ft_count_digit(n);
 	if (!(s = (char*)malloc(sizeof(char) * num + 2)))
 		return (NULL);
+	s[num--] = '\0';
 	if (n < 0)
 	{
 		s[0] = '-';
 		if (n == -2147483648)
-			n = -2147483647;
+		{
+			s[num--] = '8';
+			n = -214748364;
+		}
 		n *= -1;
 	}
-	s[num--] = '\0';
 	while (num >= 0 && s[num] != '-')
 	{
 		s[num--] = (char)(n % 10 + '0');

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:19:23 by zraunio           #+#    #+#             */
-/*   Updated: 2021/01/14 14:12:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/28 09:49:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static double	calc_float(const char *str, double res)
 		res = res / 10;
 		i--;
 	}
-	return (res);	
+	return (res);
 }
 
 double			ft_atof(const char *str)

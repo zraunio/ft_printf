@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/27 10:47:16 by zraunio           #+#    #+#              #
-#    Updated: 2021/02/19 12:52:02 by zraunio          ###   ########.fr        #
+#    Updated: 2021/03/01 14:23:04 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,19 @@ LIBNAME = libft/libft.a
 
 HDR = ./
 
-NAME = ft_printf
+NAME = libftprintf.a
+
+TEST = ft_printf
 
 SRCS = 	convert.c \
 		ft_printf.c \
 		parse.c\
 		diu.c \
-		oxX.c \
-		test_main.c 
+		oxx.c \
+		print_oxx.c \
+		spc.c \
+
+MAINS = eval_tests/test_main.c.test
 
 OBJS = $(SRCS:.c=.o)
 
@@ -29,16 +34,26 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+$(NAME): 
+	make -C libft
+	@gcc -Wall -Wextra -Werror -c $(SRCS)
+	@cp libft/libft.a libftprintf.a
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
+
 clean: 
-	make -C libft clean
-	rm -f $(OBJS)
+	/bin/rm -f $(OBJS)
+	@make -C libft/ clean
 
 fclean: clean
-	make -C libft fclean
-	rm -f $(NAME)
+	/bin/rm -f $(NAME)
+	/bin/rm -f $(TEST)
+	@make -C libft/ fclean
+
+test: fclean
+	make -C libft
+	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
 
 re: fclean all
 
-$(NAME): $(OBJS)
-	make -C libft
-	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIBNAME) -I $(HDR) -o $(NAME)
+	rm -f $(OBJS)

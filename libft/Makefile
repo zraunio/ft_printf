@@ -19,6 +19,7 @@ SRC =  	ascii/ft_isalnum.c \
 		convert/ft_atof.c \
 		convert/ft_litoa.c \
 		convert/ft_ftoa.c \
+		convert/ft_sizetoa.c \
 		list/ft_lstadd.c \
 		list/ft_lstdel.c \
 		list/ft_lstdelone.c \
@@ -31,6 +32,7 @@ SRC =  	ascii/ft_isalnum.c \
 		math/ft_float_abs.c \
 		math/ft_wdcounter.c \
 		math/ft_strstr_start.c \
+		math/ft_long_abs.c \
 		mem/ft_bzero.c \
 		mem/ft_memalloc.c \
 		mem/ft_memccpy.c \
@@ -95,7 +97,7 @@ HDR_SRC= ./
 all: $(NAME)
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror $(SRC) -I $(HDR_SRC)
+	gcc -c -Wall -Wextra -Werror -g $(SRC) -I $(HDR_SRC)
 	mkdir $(OUT_DIR)
 	mv *.o $(OUT_DIR)
 	ar rc $(NAME) $(OUT_DIR)/*.o

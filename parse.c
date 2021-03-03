@@ -6,29 +6,30 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:37:14 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/19 12:37:32 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/02 16:09:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	get_precision(const char *str)
+static int		get_precision(const char *str)
 {
 	size_t	i;
-	size_t	flg;
 
-	i = 0;
-	flg = 0;
-	while (!(ft_isdigit(str[i])) && str[i])
-	{
-		if (str[i] == '.')
-			flg = 1;
+	i = 1;
+	while (str[i] != '.' && str[i])
 		i++;
+	if (str[i] == '.')
+	{
+		if (ft_isdigit(str[i + 1]))
+			return (ft_atoi(&str[i + 1]));
+		else
+			return (0);
 	}
-	if (flg)
-		return(ft_atoi(&str[i]));
-	else
+	else if (str[ft_strlen(str) - 1] == 'f')
 		return (6);
+	else
+		return (-1);
 }
 
 static size_t	get_min_width(const char *str)
@@ -36,13 +37,16 @@ static size_t	get_min_width(const char *str)
 	size_t	i;
 	size_t	res;
 
-	i = 0;
+	i = 1;
 	res = 0;
+	while (str[i] == '-' || str[i] == '+' || str[i] == '#' || str[i] == '0'
+	|| str[i] == ' ')
+		i++;
 	while (!(ft_isdigit(str[i])))
 	{
-		i++;
 		if (str[i] == '.' || str[i] == '\0')
 			return (0);
+		i++;
 	}
 	res = ft_abs(ft_atoi(&str[i]));
 	return (res);
@@ -52,7 +56,7 @@ static void		fill_struct(const char *str, t_flags *flgs)
 {
 	size_t		i;
 
-	i = 0;
+	i = 1;
 	while (str[i] == '-' || str[i] == '+' || str[i] == '#' || str[i] == '0'
 	|| str[i] == ' ')
 	{
@@ -70,6 +74,7 @@ static void		fill_struct(const char *str, t_flags *flgs)
 		str[i] == 'h' ? flgs->h = 1 : 0;
 		str[i + 1] == 'h' ? flgs->hh = 1 : 0;
 		str[i] == 'L' ? flgs->lng_f = 1 : 0;
+		str[i] == 'z' ? flgs->z = 1: 0;
 		i++;
 	}
 }
@@ -90,16 +95,15 @@ static void		reset_flags(t_flags *flgs)
 	flgs->zero = 0;
 }
 
-void			parse(char *str, va_list *list)
+size_t			parse(char *str, va_list *list)
 {
 	t_flags		*flgs;
 
 	if (!(flgs = (t_flags*)malloc(sizeof(t_flags))))
-		return ;
+		return (0);
+	reset_flags(flgs);
+	fill_struct(str, flgs);
 	flgs->decimal = get_precision(str);
 	flgs->min_wi = get_min_width(str);
-	fill_struct(str, flgs);
-	ft_convert(str, list, flgs);
-	reset_flags(flgs);
-	free(flgs);
+	return (ft_convert(str, list, flgs));
 }

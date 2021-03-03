@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:17:13 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/18 14:13:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/02/28 09:48:56 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	ft_putdouble(long double f, int decimal)
 {
 	long double	d;
 
+	d = f - (long)f;
+	if (decimal == 0 && (d * 10) > 5)
+		f += 1;
 	ft_putlong((long)f);
 	if (decimal == 0)
 		return ;
@@ -27,8 +30,8 @@ void	ft_putdouble(long double f, int decimal)
 	ft_putchar('.');
 	while (decimal-- > 0)
 		f *= 10;
-	d = f;
-	if ((d = (d * 10) - f) >= 5)
+	d = f - (long)f;
+	if ((d * 10) >= 5)
 		f += 1;
 	ft_putlong((long)f);
 }
