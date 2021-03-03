@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:45:46 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/02 21:27:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 13:30:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static size_t		integer_long(va_list *list, t_flags *flg)
 {
 	long long int	d;
 	size_t			z;
+	char			*str;
 
+	d = 0;
+	z = 0;
 	if (flg->z)
 	{
 		z = va_arg(*list, size_t);
@@ -30,6 +33,7 @@ static size_t		integer_long(va_list *list, t_flags *flg)
 	else
 	{
 		d = va_arg(*list, long int);
+		str = ft_litoa(d);
 		return (nbr_check_flags(flg, (int)d, ft_litoa(d)));
 	}
 }
@@ -39,6 +43,8 @@ static size_t		decimal_nbr(va_list *list, t_flags *flg)
 	int			nb;
 	short		s;
 
+	nb = 0;
+	s = 0;
 	if (flg->h)
 	{
 		s = (short)va_arg(*list, int);
@@ -63,6 +69,8 @@ static size_t		unsigned_long(va_list *list, t_flags *flg)
 	unsigned long long	d;
 	unsigned long		i;
 
+	d = 0;
+	i = 0;
 	if (flg->ll)
 	{
 		d = va_arg(*list, unsigned long long);
@@ -80,6 +88,8 @@ static size_t		unsigned_nbr(va_list *list, t_flags *flg)
 	unsigned int	nb;
 	unsigned short	s;
 
+	nb = 0;
+	s = 0;
 	if (flg->h)
 	{
 		s = (unsigned short)va_arg(*list, unsigned int);

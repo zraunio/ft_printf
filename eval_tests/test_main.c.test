@@ -96,13 +96,20 @@ void		str_test(void)
 { 
 	int		d = -42;
 	double	f = 928594.000123;
+	unsigned int	u = 82399493;
 
-	ft_printf("%0+5d\n", -d);  
-	ft_printf("%0+5d\n", d);
-	ft_printf("this is f %.21f\n and f with l %12lf and L %12Lf", f, f, f);
+	ft_printf("%+5d\n", -d);
+	ft_printf("%+lli\n", d); 
+	ft_printf("%+.15f\n", f);
+	ft_printf("%+15c\n", 9);
+	ft_printf("%+15s\n", "ayayayayayaya");
+	ft_printf("%+15p\n", "ayayayayayaya");
+	ft_printf("%+15x\n", d);
+	ft_printf("%+15o\n", d);
+	ft_printf("%+15X\n", d);
+	ft_printf("%+15%\n");
+	ft_printf("%+15u\n", u);
 	ft_printf("\n----------\n");
-	printf("%0+5d\n", 42);  
-	printf("%0+5d\n", -42);
 }
 
 int				main(void)

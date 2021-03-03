@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/02 21:15:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 13:28:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static size_t	reset_printf(t_print *print)
 	ft_arr_free(print->vars);
 	ft_memdel((void*)&print->info_str);
 	print->size = 0;
+	ft_memdel((void*)&print);
 	return (i);
 }
 
@@ -88,7 +89,7 @@ int				ft_printf(const char *format, ...)
 	size_t		i;
 
 	i = 0;
-	if (!(print = (t_print *)ft_memalloc(sizeof(t_print))))
+	if (!(print = (t_print *)malloc(sizeof(t_print))))
 		return (0);
 	if (!(ft_strchr(format, '%')))
 	{
@@ -105,7 +106,6 @@ int				ft_printf(const char *format, ...)
 		return (print->size);
 	}
 	reset_printf(print);
-	free(print);
 	return (-1);
 }
 //42 checker: l and ll with x/X

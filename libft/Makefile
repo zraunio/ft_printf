@@ -68,6 +68,7 @@ SRC =  	ascii/ft_isalnum.c \
 		str/ft_striter.c \
 		str/ft_striteri.c \
 		str/ft_strjoin.c \
+		str/ft_strjoin_free.c \
 		str/ft_strlcat.c \
 		str/ft_strlen.c \
 		str/ft_strmap.c \

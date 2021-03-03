@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:37:14 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/02 16:09:10 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:28:39 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void		reset_flags(t_flags *flgs)
 	flgs->lng_f = 0;
 	flgs->left = 0;
 	flgs->ll = 0;
+	flgs->z = 0;
 	flgs->min_wi = 0;
 	flgs->sign = 0;
 	flgs->spc = 0;

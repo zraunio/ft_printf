@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/02 14:42:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 13:50:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,31 @@ size_t			padd_str(char *str, t_flags *flg, char c)
 	{
 		pad = ft_strcnew(flg->min_wi - ft_strlen(out), c);
 		if (flg->left)
-			out = ft_strjoin(out, pad);
+			out = ft_strjoin_free(out, pad, 3);
 		else
-			out = ft_strjoin(pad, out);
-		ft_memdel((void*)&pad);
+			out = ft_strjoin_free(pad, out, 3);
 	}
 	ft_putstr(out);
 	len = ft_strlen(out);
+	free(out);
+	free(str);
 	free(flg);
 	return (len);
 }
 
 static char		*handle_str(char *out, t_flags *flg)
 {
+	char	*ret;
+
+	ret = NULL;
 	if (out == NULL)
-		return (out = ft_strdup("(null)"));
+		ret = ft_strdup("(null)");
 	if (flg->decimal && flg->decimal < ft_strlen(out))
-		out = ft_strsub(out, 0, flg->decimal);
-	return (out);
+		ret = ft_strsub(out, 0, flg->decimal);
+	else
+		ret = ft_strdup(out);
+	free(out);
+	return (ret);
 }
 
 static size_t	padd_char(int c, t_flags *flg)

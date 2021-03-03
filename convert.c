@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/01 14:06:59 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 13:47:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,21 @@ static size_t		padd_nbr(char *out, t_flags *flg, char c)
 	{
 		pad = ft_strcnew(flg->min_wi - ft_strlen(out), c);
 		if (flg->left)
-			out = ft_strjoin(out, pad);
+			out = ft_strjoin_free(out, pad, 3);
 		else
 		{
 			if ((out[0] == '-' || out[0] == '+') && c == '0')
 			{
-				pad = ft_strjoin(ft_strcnew(1, out[0]), pad);
-				out = ft_strjoin(pad, &out[1]);
+				pad = ft_strjoin_free(ft_strcnew(1, out[0]), pad, 3);
+				out = ft_strjoin_free(pad, &out[1], 3);
 			}
 			else
-				out = ft_strjoin(pad, out);
+				out = ft_strjoin_free(pad, out, 3);
 		}
-		ft_memdel((void*)&pad);
 	}
 	ft_putstr(out);
-	if ((ret = ft_strlen(out)) > 1)
-		ft_memdel((void*)&out);
+	ret = ft_strlen(out);
+	free(out);
 	free(flg);
 	return (ret);
 }
@@ -49,48 +48,46 @@ static char			*expand_nbr(char *out, t_flags *flgs)
 	if (out[0] == '-' && len > 0)
 	{
 		len += 1;
-		out = ft_strjoin(ft_strcnew(len, '0'), &out[1]);
-		return (ft_strjoin("-", out));
+		out = ft_strjoin_free(ft_strcnew(len, '0'), &out[1], 1);
+		return (ft_strjoin_free("-", out, 2));
 	}
 	else
-		return (ft_strjoin(ft_strcnew(len, '0'), out));
+		return (ft_strjoin_free(ft_strcnew(len, '0'), out, 3));
 }
 
 size_t				nbr_check_flags(t_flags *flgs, int nb, char *str)
 {
 	char	c;
 	int		len;
+	char	*ret;
 
 	c = 32;
+	ret = NULL;
 	flgs->zero == 1 ? c = 48 : 32;
 	flgs->left == 1 ? c = 32 : 48;
 	if ((len = flgs->decimal - ft_strlen(str)) > 0)
 	{
-		str = expand_nbr(str, flgs);
+		ret = expand_nbr(str, flgs);
 		c = 32;
 	}
 	if (flgs->decimal == 0 && ft_strcmp("0", str) == 0)
-	{
-		ft_memdel((void*)&str);
-		str = ft_strnew(0);
-	}
+		ret = ft_strnew(0);
 	if ((flgs->spc || flgs->sign) && nb >= 0)
 	{
 		if (flgs->sign)
-			str = ft_strjoin("+", str);
+			ret = ft_strjoin("+", str);
 		else
-			str = ft_strjoin(" ", str);
+			ret = ft_strjoin(" ", str);
 	}
-	return (padd_nbr(str, flgs, c));
+	free(str);
+	return (padd_nbr(ret, flgs, c));
 }
 
 static	size_t		float_nbr(va_list *list, t_flags *flg)
 {
-	double f;
+	double	f;
 
 	f = va_arg(*list, double);
-	ft_putnbr(flg->decimal);
-	ft_putendl("");
 	if (flg->lng_f)
 		return (nbr_check_flags(flg, (int)f, ft_ftoa((long double)f,
 		flg->decimal)));

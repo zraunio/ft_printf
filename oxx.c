@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:39:01 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/02 14:27:09 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:58:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static size_t		octal_nbr(va_list *list, t_flags *flg)
 static char			*hex_convert(char *out, t_flags *flg, char x)
 {
 	size_t	i;
+	char	*ret;
 
 	i = 0;
+	ret = NULL;
 	if (x == 'X')
 	{
 		while (out[i])
@@ -49,15 +51,15 @@ static char			*hex_convert(char *out, t_flags *flg, char x)
 			i++;
 		}
 		if (flg->hash == 1)
-			out = ft_strjoin("0X", out);
-		return (out);
+			ret = ft_strjoin("0X", out);
 	}
 	else
 	{
 		if (flg->hash && (flg->decimal != 0 && ft_strcmp("0", out)))
-			out = ft_strjoin("0x", out);
-		return (out);
+			ret = ft_strjoin("0x", out);
 	}
+	free(out);
+	return (ret);
 }
 
 static size_t		hex_nbr(va_list *list, t_flags *flg, char ex)

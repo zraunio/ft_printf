@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_litoa.c                                         :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/12 12:55:46 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 13:16:19 by zraunio          ###   ########.fr       */
+/*   Created: 2021/03/03 12:21:03 by zraunio           #+#    #+#             */
+/*   Updated: 2021/03/03 12:27:47 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char		*ft_litoa(long long int n)
+char		*ft_strjoin_free(char *s1, char *s2, size_t flag)
 {
-	int		num;
-	char	*s;
+	char    *out;
 
-	num = ft_count_digit(n);
-	if (!(s = (char*)malloc(sizeof(char) * num + 1)))
+	out = ft_strjoin(s1, s2);
+	if (out == NULL)
 		return (NULL);
-	if (n < 0)
+	if (flag == 1)	
+		ft_strdel(&s1);
+	else if (flag == 2)
+		ft_strdel(&s2);
+	else if (flag == 3)
 	{
-		s[0] = '-';
-		if (n == -9223372036854775807 - 1)
-			n = -9223372036854775807;
-		n *= -1;
+		ft_strdel(&s1);
+		ft_strdel(&s2);
 	}
-	s[num--] = '\0';
-	while (num >= 0 && s[num] != '-')
-	{
-		s[num--] = (char)(n % 10 + '0');
-		n /= 10;
-	}
-	return (s);
+	return (out);
 }
