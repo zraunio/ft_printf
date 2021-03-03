@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:39:01 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 11:58:57 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 14:12:52 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ static char			*hex_convert(char *out, t_flags *flg, char x)
 		}
 		if (flg->hash == 1)
 			ret = ft_strjoin("0X", out);
+		else
+			ret = ft_strdup(out);
+		
 	}
 	else
 	{
 		if (flg->hash && (flg->decimal != 0 && ft_strcmp("0", out)))
 			ret = ft_strjoin("0x", out);
+		else
+			ret = ft_strdup(out);
 	}
 	free(out);
 	return (ret);

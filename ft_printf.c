@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 13:28:01 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:23:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ int				ft_printf(const char *format, ...)
 	size_t		i;
 
 	i = 0;
-	if (!(print = (t_print *)malloc(sizeof(t_print))))
-		return (0);
+	print = NULL;
 	if (!(ft_strchr(format, '%')))
 	{
 		ft_putstr(format);
@@ -98,6 +97,8 @@ int				ft_printf(const char *format, ...)
 	}
 	else if (format)
 	{
+		if (!(print = (t_print*)malloc(sizeof(t_print))))
+			return (0);
 		va_start(arg, format);
 		print->arg = &arg;
 		print->info_str = ft_strdup(format);

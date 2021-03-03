@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:37:14 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 11:28:39 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:00:14 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static void		reset_flags(t_flags *flgs)
 size_t			parse(char *str, va_list *list)
 {
 	t_flags		*flgs;
+	size_t		ret;
 
 	if (!(flgs = (t_flags*)malloc(sizeof(t_flags))))
 		return (0);
@@ -106,5 +107,7 @@ size_t			parse(char *str, va_list *list)
 	fill_struct(str, flgs);
 	flgs->decimal = get_precision(str);
 	flgs->min_wi = get_min_width(str);
-	return (ft_convert(str, list, flgs));
+	ret = ft_convert(str, list, flgs);
+	free(flgs);
+	return (ret);
 }

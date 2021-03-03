@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:45:46 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 13:30:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 15:48:05 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static size_t		integer_long(va_list *list, t_flags *flg)
 {
 	long long int	d;
 	size_t			z;
-	char			*str;
 
 	d = 0;
 	z = 0;
@@ -33,7 +32,6 @@ static size_t		integer_long(va_list *list, t_flags *flg)
 	else
 	{
 		d = va_arg(*list, long int);
-		str = ft_litoa(d);
 		return (nbr_check_flags(flg, (int)d, ft_litoa(d)));
 	}
 }
