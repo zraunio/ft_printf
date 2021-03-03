@@ -6,14 +6,14 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 16:23:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:34:51 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-static void 	fill_vars(t_print *print, char *temp)
+static void 	fill_vars(t_print *print)
 {
     size_t	i;
     size_t	j;
@@ -22,22 +22,22 @@ static void 	fill_vars(t_print *print, char *temp)
 
     i = 0;
     j = 0;
-	count = ft_wdcounter(temp, '%');
-    while (j < count && temp[i] != '\0')
+	count = ft_wdcounter(print->info_str, '%');
+    while (j < count && print->info_str[i] != '\0')
     {
         start = i;
-        while (temp[i] != '\0' && temp[i] != '%')
+        while (print->info_str[i] != '\0' && print->info_str[i] != '%')
             i++;
         if (start != i)
-            print->vars[j++] = ft_strsub(temp, start, (i - start));
-        if (temp[i] == '%')
+            print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
+        if (print->info_str[i] == '%')
         {
             start = i++;
-            while (temp[i] != '\0' && ft_strchr("cspdiouxXf%", temp[i]) == NULL)
+            while (print->info_str[i] != '\0' && ft_strchr("cspdiouxXf%", print->info_str[i]) == NULL)
                 i++;
-            if (ft_strchr("cspdiouxXf%", temp[i]))
+            if (ft_strchr("cspdiouxXf%", print->info_str[i]))
                 i++;
-            print->vars[j++] = ft_strsub(temp, start, (i - start));
+            print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
         }
     }
     print->vars[j] = NULL;
@@ -58,13 +58,11 @@ static size_t	reset_printf(t_print *print)
 static size_t	ft_print(t_print *print)
 {
 	size_t	i;
-	char	*temp;
 
-	temp = ft_strdup(print->info_str);
-	i = ft_wdcounter(temp, '%');
+	i = ft_wdcounter(print->info_str, '%');
 	if (!(print->vars = (char**)malloc(sizeof(char*) * (i + 1))))
 		return (0);
-	fill_vars(print, temp);
+	fill_vars(print);
 	i = 0;
 	while (print->vars[i])
 	{
@@ -75,10 +73,8 @@ static size_t	ft_print(t_print *print)
 			ft_putstr(print->vars[i]);
 			print->size += ft_strlen(print->vars[i]);
 		}
-		//ft_putendl(print->vars[i]);
 		i++;
 	}
-	free(temp);
 	return (reset_printf(print));
 }
 

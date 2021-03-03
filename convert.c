@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 16:13:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/03 18:17:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static size_t		padd_nbr(char *out, t_flags *flg, char c)
 			if ((out[0] == '-' || out[0] == '+') && c == '0')
 			{
 				pad = ft_strjoin_free(ft_strcnew(1, out[0]), pad, 2);
-				out = ft_strjoin_free(pad, &out[1], 1);
+				out = ft_strjoin_free(pad, &out[1], 3);
 			}
 			else
-				out = ft_strjoin_free(pad, out, 1);
+				out = ft_strjoin_free(pad, out, 3);
 		}
 	}
 	ft_putstr(out);
@@ -75,7 +75,7 @@ size_t				nbr_check_flags(t_flags *flgs, int nb, char *str)
 		ret = ft_strnew(0);
 	else
 	{
-		if (!(ret = (char*)malloc(sizeof(ret))))
+		if (!(ret = (char*)malloc(sizeof(char) * ft_strlen(str) - 1)))
 			return (0);
 		ret = ft_strcpy(ret, str);
 		free(str);
