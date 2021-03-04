@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:43 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/02 13:18:42 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:58:49 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_print
 	char		**vars;
 	char		*info_str;
 	va_list		*arg;
-	size_t		size;
+	int			size;
 }				t_print;
 
 typedef struct	s_flags

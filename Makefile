@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/27 10:47:16 by zraunio           #+#    #+#              #
-#    Updated: 2021/03/04 13:11:58 by zraunio          ###   ########.fr        #
+#    Updated: 2021/03/04 15:28:44 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ fclean: clean
 
 test: fclean
 	make -C libft
-	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
+	gcc -Wall -Wextra -Werror -g -fsanitize=address $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
 
 re: fclean all
 

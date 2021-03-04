@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:21:41 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:15:00 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ static char			*expand_nbr(char *out, t_flags *flgs)
 {
 	int		len;
 	char	*ret;
+	char	*temp;
 
 	len = flgs->decimal - ft_strlen(out);
 	if (out[0] == '-' && len > 0)
 	{
 		len += 1;
-		out = ft_strjoin_free(ft_strcnew(len, '0'), &out[1], 3);
+		temp = out;
+		out = ft_strjoin_free(ft_strcnew(len, '0'), &out[1], 1);
+		free(temp);
 		ret = ft_strjoin_free("-", out, 2);
 	}
 	else

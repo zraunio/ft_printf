@@ -6,12 +6,29 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:23:46 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:31:24 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
+
+static int	reset_printf(t_print *print, int n)
+{
+	size_t	i;
+
+	if (n != -1)
+	{
+		i = print->size;
+		ft_arr_free(print->vars);
+		ft_memdel((void*)&print->info_str);
+		print->size = 0;
+		free(print);
+	}
+	else 
+		i = n;
+	return (i);
+}
 
 static void 	fill_vars(t_print *print)
 {
@@ -22,14 +39,17 @@ static void 	fill_vars(t_print *print)
 
 	i = 0;
 	j = 0;
-	count = ft_wdcounter(print->info_str, '%');
+	count = ft_wdcounter(print->info_str, '%') + 1;
 	while (j < count && print->info_str[i] != '\0')
 	{
 		start = i;
 		while (print->info_str[i] != '\0' && print->info_str[i] != '%')
 			i++;
 		if (start != i)
-			print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
+		{
+			if (!(print->vars[j++] = ft_strsub(print->info_str, start, (i - start))))
+				return ((void)reset_printf(print, -1));
+		}
 		if (print->info_str[i] == '%')
 		{
 			start = i++;
@@ -37,22 +57,11 @@ static void 	fill_vars(t_print *print)
 				i++;
 			if (ft_strchr("cspdiouxXf%", print->info_str[i]))
 				i++;
-			print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
+			if (!(print->vars[j++] = ft_strsub(print->info_str, start, (i - start))))
+				return ((void)reset_printf(print, -1));
 		}
 	}
 	print->vars[j] = NULL;
-}
-
-static size_t	reset_printf(t_print *print)
-{
-	size_t	i;
-
-	i = print->size;
-	ft_arr_free(print->vars);
-	ft_memdel((void*)&print->info_str);
-	print->size = 0;
-	free(print);
-	return (i);
 }
 
 static size_t	ft_print(t_print *print)
@@ -76,14 +85,14 @@ static size_t	ft_print(t_print *print)
 		//ft_putendl(print->vars[i]);
 		i++;
 	}
-	return (reset_printf(print));
+	return (reset_printf(print, 1));
 }
 
 int				ft_printf(const char *format, ...)
 {
 	t_print		*print;
 	va_list		arg;
-	size_t		i;
+	int			i;
 
 	i = 0;
 	print = NULL;
@@ -99,12 +108,11 @@ int				ft_printf(const char *format, ...)
 		va_start(arg, format);
 		print->arg = &arg;
 		print->info_str = ft_strdup(format);
-		print->size = ft_print(print);
+		i = ft_print(print);
 		va_end(arg);
-		return (print->size);
+		return (i);
 	}
-	reset_printf(print);
-	return (-1);
+	return (reset_printf(print, -1));
 }
 //42 checker: l and ll with x/X
 //. with x/X working wrong?

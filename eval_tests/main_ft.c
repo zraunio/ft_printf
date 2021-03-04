@@ -6,19 +6,20 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:07:07 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:08:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 15:28:11 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../ft_printf.h"
+#include "stdio.h"
 
-/*void	test_multi(void)
+void	test_multi(void)
 {
 	char	*p = ft_strnew(3);
 
-	ft_printf("		hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\nMUHAHAHAHAHAH",
-	"stranger", 34, 4.82749382382, 1600, '\0', '\t', '|', p);
+	ft_printf("		hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours",
+	"stranger", 34, 4.82749382382, 1600);
 	ft_printf("\n----------\n");
 	ft_printf("%s%s%d%d", "string", NULL, 923, -8988);
 	ft_printf("\n----------\n");
@@ -51,7 +52,7 @@ void	test_decimal(void)
 	ft_printf("same with 0&+ %+0.5u\nthen with - and ' ' % -40u\n", l, l);
 	for (ll = 40000; ll < 40100; ll++)
 		ft_printf("%u\n", ll);
-}*/
+}
 
 void	test_spc(void)
 {
@@ -76,8 +77,8 @@ void	test_spc(void)
 
 int		main(void)
 {
-	//test_multi();
-	//test_decimal();
+	test_multi();
+	test_decimal();
 	test_spc();
 	return (0);
 }
