@@ -137,21 +137,34 @@ char			**ft_strsoft_split(char const *s)
 }
 */
 
+static size_t	count_split(const char *str)
+{
+	size_t	words;
+	size_t	i;
+
+	words = 1;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		while (str[i] == '%' && str[i] != '\0')
+			i++;
+		if (str[i])
+			words++;
+		while (str[i] != '%' && str[i] != '\0')
+			i++;
+		if (str[i])
+			words++;
+	}
+	return (words);
+}
+
 int		main()
 {
-	ft_putendl(ft_itoa(22222222));
-	ft_putendl(ft_itoa(3));
-	ft_putendl(ft_itoa(-22222222));
-	ft_putendl(ft_ftoa(193849248.00028384l, 12));
-	ft_putendl(ft_ftoa(1948092784.00008284l, 12));
-	ft_putendl(ft_ftoa(88742222.1111119l, 12));
-	ft_putendl(ft_ftoa(193849248.00028384l, 12));
-	ft_putendl(ft_ftoa(1948092784.00008284l, 12));
-	ft_putendl(ft_ftoa(88742222.1111119l, 12));
-	ft_putendl(ft_ftoa(193849248.00028384l, 12));
-	ft_putendl(ft_ftoa(1948092784.00008284l, 12));
-	ft_putendl(ft_ftoa(88742222.1111119l, 19));
+	int d;
+	d = count_split("4 %s %s %s %s");
+	ft_putnbr(d);
 	return (0);
 }
 //gcc -Wall -Wextra -Werror main.c libft/libft.a -I libft/ -o test
 //gcc -Wall -Wextra -Werror main.c -L./ -lftprintf -I./ -L libft/ -lft  -o test
+//-fsanitize=address 

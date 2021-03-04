@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/27 10:47:16 by zraunio           #+#    #+#              #
-#    Updated: 2021/03/04 15:28:44 by zraunio          ###   ########.fr        #
+#    Updated: 2021/03/04 19:30:56 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = 	convert.c \
 		print_oxx.c \
 		spc.c \
 
-MAINS = eval_tests/main_ft.c
+MAINS = eval_tests/main_ft.c.test
 
 OBJS = $(SRCS:.c=.o)
 
@@ -52,7 +52,7 @@ fclean: clean
 
 test: fclean
 	make -C libft
-	gcc -Wall -Wextra -Werror -g -fsanitize=address $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
+	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 15:15:00 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 17:23:55 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ size_t				nbr_check_flags(t_flags *flgs, int nb, char *str)
 	}
 	else
 	{
-		if (!(ret = (char*)malloc(sizeof(char) * ft_strlen(str) - 1)))
+		if (!(ret = (char*)malloc(sizeof(char) * ft_strlen(str))))
 			return (0);
 		ret = ft_strcpy(ret, str);
 		free(str);
@@ -112,8 +112,7 @@ static	size_t		float_nbr(va_list *list, t_flags *flg)
 	if (flg->lng_f)
 	{
 		d = va_arg(*list, long double);
-		return (nbr_check_flags(flg, (int)d, ft_ftoa(d,
-		flg->decimal)));
+		return (nbr_check_flags(flg, (int)d, ft_ftoa(d, flg->decimal)));
 	}
 	else if (flg->l)
 	{

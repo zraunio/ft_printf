@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_ft.c                                          :+:      :+:    :+:   */
+/*   main_ft.c.test                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:07:07 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 15:28:11 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 19:29:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@
 
 void	test_multi(void)
 {
-	char	*p = ft_strnew(3);
+	char	*p = ft_strdup("434");
 
-	ft_printf("		hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours",
-	"stranger", 34, 4.82749382382, 1600);
+	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %s\nweeeee",
+	"stranger", 34, 4.82749382382l, 1600, '\0', '\t', ' ', p);
+	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\n",
+	"stranger", 34, 4.82749382382, 1600, '\0', '\t', ' ', p);
+	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\n",
+	"stranger", 34, 4.82749382382, 1600, '\0', '\t', ' ', p);
 	ft_printf("\n----------\n");
 	ft_printf("%s%s%d%d", "string", NULL, 923, -8988);
 	ft_printf("\n----------\n");

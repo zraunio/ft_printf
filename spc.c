@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:03:01 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 16:09:45 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static size_t	padd_char(int c, t_flags *flg)
 		}
 		else
 			ft_putstr(pad);
-		ft_memdel((void*)&pad);
+		free(pad);
 	}
 	ft_putchar(c);
 	return (len + 1);

@@ -6,12 +6,11 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 15:31:24 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 19:26:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int	reset_printf(t_print *print, int n)
 {
@@ -30,6 +29,27 @@ static int	reset_printf(t_print *print, int n)
 	return (i);
 }
 
+static size_t	count_split(const char *str)
+{
+	size_t	words;
+	size_t	i;
+
+	words = 1;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		while (str[i] == '%' && str[i] != '\0')
+			i++;
+		if (str[i])
+			words++;
+		while (str[i] != '%' && str[i] != '\0')
+			i++;
+		if (str[i])
+			words++;
+	}
+	return (words);
+}
+
 static void 	fill_vars(t_print *print)
 {
 	size_t	i;
@@ -39,8 +59,8 @@ static void 	fill_vars(t_print *print)
 
 	i = 0;
 	j = 0;
-	count = ft_wdcounter(print->info_str, '%') + 1;
-	while (j < count && print->info_str[i] != '\0')
+	count = count_split(print->info_str);
+	while (j <= count && print->info_str[i])
 	{
 		start = i;
 		while (print->info_str[i] != '\0' && print->info_str[i] != '%')
@@ -68,7 +88,7 @@ static size_t	ft_print(t_print *print)
 {
 	size_t	i;
 
-	i = ft_wdcounter(print->info_str, '%');
+	i = count_split(print->info_str);
 	if (!(print->vars = (char**)malloc(sizeof(char*) * (i + 1))))
 		return (0);
 	fill_vars(print);
@@ -82,7 +102,6 @@ static size_t	ft_print(t_print *print)
 			ft_putstr(print->vars[i]);
 			print->size += ft_strlen(print->vars[i]);
 		}
-		//ft_putendl(print->vars[i]);
 		i++;
 	}
 	return (reset_printf(print, 1));
