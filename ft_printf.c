@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 16:34:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:23:46 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,32 @@
 
 static void 	fill_vars(t_print *print)
 {
-    size_t	i;
-    size_t	j;
-    size_t	start;
+	size_t	i;
+	size_t	j;
+	size_t	start;
 	size_t	count;
 
-    i = 0;
-    j = 0;
+	i = 0;
+	j = 0;
 	count = ft_wdcounter(print->info_str, '%');
-    while (j < count && print->info_str[i] != '\0')
-    {
-        start = i;
-        while (print->info_str[i] != '\0' && print->info_str[i] != '%')
-            i++;
-        if (start != i)
-            print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
-        if (print->info_str[i] == '%')
-        {
-            start = i++;
-            while (print->info_str[i] != '\0' && ft_strchr("cspdiouxXf%", print->info_str[i]) == NULL)
-                i++;
-            if (ft_strchr("cspdiouxXf%", print->info_str[i]))
-                i++;
-            print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
-        }
-    }
-    print->vars[j] = NULL;
+	while (j < count && print->info_str[i] != '\0')
+	{
+		start = i;
+		while (print->info_str[i] != '\0' && print->info_str[i] != '%')
+			i++;
+		if (start != i)
+			print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
+		if (print->info_str[i] == '%')
+		{
+			start = i++;
+			while (print->info_str[i] != '\0' && ft_strchr("cspdiouxXf%", print->info_str[i]) == NULL)
+				i++;
+			if (ft_strchr("cspdiouxXf%", print->info_str[i]))
+				i++;
+			print->vars[j++] = ft_strsub(print->info_str, start, (i - start));
+		}
+	}
+	print->vars[j] = NULL;
 }
 
 static size_t	reset_printf(t_print *print)
@@ -51,7 +51,7 @@ static size_t	reset_printf(t_print *print)
 	ft_arr_free(print->vars);
 	ft_memdel((void*)&print->info_str);
 	print->size = 0;
-	ft_memdel((void*)&print);
+	free(print);
 	return (i);
 }
 
@@ -73,6 +73,7 @@ static size_t	ft_print(t_print *print)
 			ft_putstr(print->vars[i]);
 			print->size += ft_strlen(print->vars[i]);
 		}
+		//ft_putendl(print->vars[i]);
 		i++;
 	}
 	return (reset_printf(print));

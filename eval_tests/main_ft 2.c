@@ -6,14 +6,14 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:07:07 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:08:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 13:23:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../ft_printf.h"
 
-/*void	test_multi(void)
+void	test_multi(void)
 {
 	char	*p = ft_strnew(3);
 
@@ -38,46 +38,20 @@ void	test_decimal(void)
 
 	ft_printf("d&i w/ l\n%ld\n%li", d, i);
 	ft_printf("\n----------\n");
-	ft_printf("d&i w/ ll\n%lld\n%lli", l, l);
+	ft_printf("dd&i w/ ll\n%lld\n%lli", l, l);
 	ft_printf("\n----------\n");
-	ft_printf("precision of .5 %.5d\nmin width of 40 %40d \n", i, i);
-	ft_printf("same with 0&+ %+0.5i\nthen with - and ' ' % -40i \n", i, i);
 	for (d = 0; d < 20; d++)
 		ft_printf("%d\n", d);
 	for (d = 0; d > -20; d--)
 		ft_printf("%d\n", d);
 	ft_printf("u w/ l&ll\n%lu\n%llu", l, ll);
-	ft_printf("precision of .5 %.5u\nmin width of 40 %40u\n", l, l);
-	ft_printf("same with 0&+ %+0.5u\nthen with - and ' ' % -40u\n", l, l);
 	for (ll = 40000; ll < 40100; ll++)
 		ft_printf("%u\n", ll);
-}*/
-
-void	test_spc(void)
-{
-	char	*p;
-	char	*s;
-	p = ft_strnew(3);
-	s = ft_strdup("and IIIIIIIIIIIiIIIII will aLLLLways\n");
-
-	ft_printf("hello |%c| that was a NULL char", 0);
-	ft_printf("\n----------\n");
-	ft_printf("hello |%c| that was another char", 123);
-	ft_printf("\n----------\n");
-	ft_printf("this is s |%s|\n", s);
-	ft_printf("this is s with precision |%60s|\n", s);
-	ft_printf("this is s with '-' precision |%-60s|");
-	ft_printf("\n----------\n");
-	ft_printf("this is p |%p|\nthis is p with precision |%20p|\nthis is p with '-' precision |%-20p|", p, p, p);
-
-	ft_memdel((void*)&p);
-	ft_memdel((void*)&s);
 }
 
 int		main(void)
 {
-	//test_multi();
-	//test_decimal();
-	test_spc();
+	test_multi();
+	test_decimal();
 	return (0);
 }

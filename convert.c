@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 13:15:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:21:41 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char			*expand_nbr(char *out, t_flags *flgs)
 	if (out[0] == '-' && len > 0)
 	{
 		len += 1;
-		out = ft_strjoin_free(ft_strcnew(len, '0'), &out[1], 1);
+		out = ft_strjoin_free(ft_strcnew(len, '0'), &out[1], 3);
 		ret = ft_strjoin_free("-", out, 2);
 	}
 	else

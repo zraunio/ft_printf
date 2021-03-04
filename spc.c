@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 13:16:22 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:03:01 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ size_t			convert_spc(char *str, va_list *list, t_flags *flg)
 
 	if (str[ft_strlen(str) - 1] == 's')
 	{
-		ret = va_arg(*list, char *);
-		return (padd_str(handle_str(ret, flg), flg, ' '));
+		ret = handle_str(va_arg(*list, char *), flg);
+		return (padd_str(ret, flg, ' '));
 	}
 	else if (str[ft_strlen(str) - 1] == 'p')
 		return (padd_str(ft_itoa_base(va_arg(*list, unsigned long), 16),
