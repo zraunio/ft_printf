@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 12:42:50 by zraunio           #+#    #+#             */
-/*   Updated: 2021/02/01 14:19:19 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:29:18 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		*ft_utoa(unsigned long int n)
 {
 	char		*res;
-	size_t		len;
+	int			len;
 
 	len = ft_count_digit(n);
 	if (!(res = ft_strnew(len)))

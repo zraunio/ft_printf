@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:01:21 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 12:23:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 14:35:16 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ size_t				ft_abs(long int value);
 float				ft_float_abs(float value);
 unsigned long int	ft_long_abs(long long int value);
 size_t				ft_wdcounter(char const *str, char c);
-int					dig_count_base(unsigned long int nb,
-					unsigned long int base);
+int					dig_count_base(long long int nb,
+					long int base);
 int					ft_count_digit(long int nb);
 size_t				ft_strstr_start(const char *haystack, const char *needle);
 /*
@@ -57,13 +57,13 @@ char				*ft_itoa(int n);
 int					ft_atoi(const char *str);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-char				*ft_itoa_base(unsigned long int nb,
-					unsigned long int base);
+char				*ft_itoa_base(long long int nb,
+					long int base);
 char				*ft_lutoa_base(unsigned long long int nb,
-					unsigned long int base);
+					long int base);
 char				*ft_lutoa(unsigned long int nb);
 char				*ft_utoa(unsigned long int n);
-char				*ft_utoa_base(unsigned long int nb, unsigned long int base);
+char				*ft_utoa_base(unsigned long int nb, long int base);
 double				ft_atof(const char *str);
 char				*ft_litoa(long long int n);
 char				*ft_ftoa(long double d, size_t decimal);
