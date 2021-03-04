@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 19:06:35 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 13:15:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ size_t				nbr_check_flags(t_flags *flgs, int nb, char *str)
 		c = 32;
 	}
 	else if (flgs->decimal == 0 && ft_strcmp("0", str) == 0)
+	{
 		ret = ft_strnew(0);
+		free(str);
+	}
 	else
 	{
 		if (!(ret = (char*)malloc(sizeof(char) * ft_strlen(str) - 1)))

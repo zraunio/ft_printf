@@ -97,9 +97,18 @@ void		str_test(void)
   ft_printf("%-10d\n", 3);
   ft_printf("% lld\n", 3);
   ft_printf("%+ld\n", 3);
-  ft_printf("%12f\n", 0.0082842);
-  ft_printf("%12lf\n", 0.824834834);
-  ft_printf("%12Lf\n", 1948092784.00008284l);
+  ft_printf("%-10d\n", 3);
+  ft_printf("% lld\n", 3);
+  ft_printf("%+ld\n", 3);
+  ft_printf("%-10d\n", 3);
+  ft_printf("% lld\n", 3);
+  ft_printf("%+ld\n", 3);
+  ft_printf("%-10d\n", 3);
+  ft_printf("% lld\n", 3);
+  ft_printf("%+ld\n", 3);
+  //ft_printf("%12f\n", 0.0082842);
+  //ft_printf("%12lf\n", 0.824834834);
+  //ft_printf("%12Lf\n", 1948092784.00008284l);
 }
 
 int				main(void)

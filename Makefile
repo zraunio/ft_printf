@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/27 10:47:16 by zraunio           #+#    #+#              #
-#    Updated: 2021/03/01 14:23:04 by zraunio          ###   ########.fr        #
+#    Updated: 2021/03/04 13:11:58 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = 	convert.c \
 		print_oxx.c \
 		spc.c \
 
-MAINS = eval_tests/test_main.c.test
+MAINS = eval_tests/main_ft.c
 
 OBJS = $(SRCS:.c=.o)
 

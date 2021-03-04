@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 16:41:06 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/04 13:16:22 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ size_t			padd_str(char *str, t_flags *flg, char c)
 	{
 		pad = ft_strcnew(flg->min_wi - ft_strlen(out), c);
 		if (flg->left)
-			out = ft_strjoin_free(out, pad, 2);
+			out = ft_strjoin_free(out, pad, 3);
 		else
-			out = ft_strjoin_free(pad, out, 1);
+			out = ft_strjoin_free(pad, out, 3);
 	}
 	ft_putstr(out);
 	len = ft_strlen(out);

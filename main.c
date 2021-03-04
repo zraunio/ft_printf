@@ -139,8 +139,18 @@ char			**ft_strsoft_split(char const *s)
 
 int		main()
 {
-
-	ft_itoa_base(0, 16);
+	ft_putendl(ft_itoa(22222222));
+	ft_putendl(ft_itoa(3));
+	ft_putendl(ft_itoa(-22222222));
+	ft_putendl(ft_ftoa(193849248.00028384l, 12));
+	ft_putendl(ft_ftoa(1948092784.00008284l, 12));
+	ft_putendl(ft_ftoa(88742222.1111119l, 12));
+	ft_putendl(ft_ftoa(193849248.00028384l, 12));
+	ft_putendl(ft_ftoa(1948092784.00008284l, 12));
+	ft_putendl(ft_ftoa(88742222.1111119l, 12));
+	ft_putendl(ft_ftoa(193849248.00028384l, 12));
+	ft_putendl(ft_ftoa(1948092784.00008284l, 12));
+	ft_putendl(ft_ftoa(88742222.1111119l, 19));
 	return (0);
 }
 //gcc -Wall -Wextra -Werror main.c libft/libft.a -I libft/ -o test
