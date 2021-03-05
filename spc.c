@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 16:09:45 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/05 17:59:25 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char		*handle_str(char *out, t_flags *flg)
 	ret = NULL;
 	if (out == NULL)
 		ret = ft_strdup("(null)");
-	if (flg->decimal && flg->decimal < ft_strlen(out))
+	if (flg->decimal != (size_t)-1 && flg->decimal < ft_strlen(out))
 		ret = ft_strsub(out, 0, flg->decimal);
 	else if (!ret)
 		ret = ft_strdup(out);
@@ -73,6 +73,14 @@ static size_t	padd_char(int c, t_flags *flg)
 	return (len + 1);
 }
 
+static size_t	prepend_ptr(char *str, t_flags *flg, char c)
+{
+	char *out;	
+
+	out = ft_strjoin_free("0x", str, 2);
+	return (padd_str(out, flg, c));
+}
+
 size_t			convert_spc(char *str, va_list *list, t_flags *flg)
 {
 	char	*ret;
@@ -83,7 +91,7 @@ size_t			convert_spc(char *str, va_list *list, t_flags *flg)
 		return (padd_str(ret, flg, ' '));
 	}
 	else if (str[ft_strlen(str) - 1] == 'p')
-		return (padd_str(ft_itoa_base(va_arg(*list, unsigned long), 16),
+		return (prepend_ptr(ft_itoa_base(va_arg(*list, unsigned long), 16),
 		flg, ' '));
 	else
 		return (padd_char((va_arg(*list, int)), flg));

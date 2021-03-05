@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:51:29 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 19:16:30 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/05 19:28:33 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ char		*ft_ftoa(long double d, size_t decimal)
 	char		*rest;
 	long double	f;
 
-	f = d - (long)d;
+	f = d - (long long)d;
 	if (decimal == 0 && (f * 10) > 5)
 		d += 1;
-	res = ft_litoa((long)d);
+	res = ft_litoa((long long)d);
 	if (decimal > 0)
 	{
-		d -= (long)d;
+		d -= (long long)d;
 		res = ft_strjoin_free(res, ".", 1);
 		if (decimal >= 20)
 			decimal = 19;
@@ -34,10 +34,11 @@ char		*ft_ftoa(long double d, size_t decimal)
 			if (decimal && (int)d == 0)
 				res = ft_strjoin_free(res, "0", 1);
 		}
-		f = d - (long)d;
+		f = d - (long long)d;
 		if ((f * 10) >= 5)
 			d += 1;
-		rest = ft_litoa((long)d);
+		d = d > 0 ? d : -d;
+		rest = ft_litoa((long long)d);
 		res = ft_strjoin_free(res, rest, 3);
 	}
 	return (res);

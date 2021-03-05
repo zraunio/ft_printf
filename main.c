@@ -137,7 +137,7 @@ char			**ft_strsoft_split(char const *s)
 }
 */
 
-static size_t	count_split(const char *str)
+size_t	count_split(const char *str)
 {
 	size_t	words;
 	size_t	i;
@@ -160,9 +160,24 @@ static size_t	count_split(const char *str)
 
 int		main()
 {
-	int d;
-	d = count_split("4 %s %s %s %s");
-	ft_putnbr(d);
+	/*unsigned long long l = 4294967296;
+	unsigned long long ll = 9223372036854775807;
+
+	ft_putendl(ft_lutoa_base(l, 16));
+	ft_putendl(ft_lutoa_base(ll + 1, 16));
+	ft_putendl(ft_lutoa_base(l, 16));
+	ft_putendl(ft_lutoa_base(6734074387, 16));
+	ft_putendl(ft_lutoa_base(l, 16));
+	ft_putendl(ft_lutoa_base(ll, 16));
+	ft_putendl(ft_lutoa_base(9999999, 16));
+	ft_putendl(ft_lutoa_base(ll, 16));
+	ft_printf("%lld", -9223372036854775808);
+	ft_printf("%hhd", 128); 
+	ft_printf("%hhd", -129);
+	ft_printf("%lu", -42);*/
+	double f = -958.125;
+	ft_putendl(ft_ftoa(f, 6));
+	ft_putendl(ft_ftoa(f, 6));
 	return (0);
 }
 //gcc -Wall -Wextra -Werror main.c libft/libft.a -I libft/ -o test

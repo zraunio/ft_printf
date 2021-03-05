@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:24:23 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:35:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/05 13:16:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@ static int	ft_base(unsigned long long int nb)
 
 char		*ft_lutoa_base(unsigned long long int nb, long int base)
 {
-	int						i;
-	char					*res;
-	long long int			tmp;
+	int							i;
+	char						*res;
+	long long int				tmp;
 
 	i = 0;
 	tmp = nb;
 	while (tmp >= base)
 		tmp = tmp / base;
 	i = dig_count_base(nb, base);
-	res = ft_strnew(i);
-	res[i + 1] = '\0';
+	res = ft_strnew(i + 1);
 	while (i >= 0)
 	{
 		tmp = nb % base;

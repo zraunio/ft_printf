@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:43 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:58:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:17:31 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ size_t			convert_oxx(char *str, va_list *list, t_flags *flg);
 size_t			precision_base(char *out, t_flags *flgs, char b, char c);
 size_t			convert_diu(char *str, va_list *list, t_flags *flg);
 size_t			convert_spc(char *str, va_list *list, t_flags *flg);
-size_t			nbr_check_flags(t_flags *flgs, int nb, char *str);
+size_t			nbr_check_flags(t_flags *flgs, long long nb, char *str, char c);
 int				ft_printf(const char *format, ...);
 
 #endif

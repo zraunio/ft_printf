@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 10:11:20 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 16:10:55 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/05 17:49:53 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static size_t		padd_base(char *out, t_flags *flg, char b, char c)
 		{
 			if (out[0] == '0' && c == '0')
 			{
-				if (b == 'h')
+				if (b == 'h' && out[1] == 'x')
 				{
 					pad = ft_strjoin_free("0x", pad, 2);
 					out = ft_strjoin_free(pad, &out[2], 1);
@@ -53,12 +53,10 @@ static char	*padd_hash(char *out, size_t len)
 	char	*ret;
 	char	*x;
 
-	ret = NULL;
 	x = NULL;
-	out[1] == 'x' ? x = ft_strdup("0x") : ft_strdup("0X");
-	out = ft_strjoin(ft_strcnew(len, '0'), &out[2]);
-	out = ft_strjoin(x, out);
-	free(x);
+	x = out[1] == 'x' ? ft_strdup("0x") : ft_strdup("0X");
+	out = ft_strjoin_free(ft_strcnew(len, '0'), &out[2], 1);
+	ret = ft_strjoin_free(x, out, 3);
 	return (ret);
 }
 
@@ -67,20 +65,25 @@ size_t		precision_base(char *out, t_flags *flgs, char b, char c)
 	int		len;
 	char	*ret;
 
-	len = flgs->decimal - ft_strlen(out);
-	if (flgs->decimal == 0 && ft_strcmp("0", out) == 0)
+	ret = NULL;
+	if (ft_strcmp("0", out) == 0)
 	{
-		free(out);
-		if (flgs->hash && b == 'o')
-			return (padd_base(ft_strcnew(1, '0'), flgs, b, c));
-		else
-			return (padd_base(ft_strnew(0), flgs, b, c));
+		c = flgs->decimal == 0 ? 32 : c;
+		if (flgs->decimal == 0)
+		{
+			free (out);
+			if (flgs->hash && b == 'o')
+				return (padd_base(ft_strcnew(1, '0'), flgs, b, c));
+			else
+				return (padd_base(ft_strcnew(1, '\0'), flgs, b, c));
+		}
 	}
-	else if (flgs->hash && b == 'o')
-		ret = ft_strjoin_free("0", out, 0);
-	else if (len > 0)
+	if (flgs->hash && out[0] != '0' && b == 'o')
+		out = ft_strjoin_free("0", out, 2);
+	len = flgs->decimal - ft_strlen(out);
+	if (len > 0)
 	{
-		if (out[0] == '0' && b == 'h' && flgs->hash)
+		if ((out[1] == 'x' || out[1] == 'X') && b == 'h' && flgs->hash)
 		{
 			len += 1;
 			ret = padd_hash(out, len);
@@ -90,6 +93,6 @@ size_t		precision_base(char *out, t_flags *flgs, char b, char c)
 	}
 	else
 		ret = ft_strdup(out);
-	free(out);
+	ft_strdel(&out);
 	return (padd_base(ret, flgs, b, c));
 }

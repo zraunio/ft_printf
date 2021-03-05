@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 17:23:55 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/05 18:42:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t		padd_nbr(char *str, t_flags *flg, char c)
 			out = ft_strjoin_free(str, pad, 3);
 		else
 		{
-			if ((str[0] == '-' || str[0] == '+') && c == '0')
+			if ((str[0] == '-' || str[0] == '+' || str[0] == ' ') && c == '0')
 			{
 				pad = ft_strjoin_free(ft_strcnew(1, str[0]), pad, 3);
 				out = ft_strjoin_free(pad, &str[1], 1);
@@ -37,7 +37,7 @@ static size_t		padd_nbr(char *str, t_flags *flg, char c)
 	}
 	else
 	{
-		if (!(out = (char*)malloc(sizeof(char) * ft_strlen(str))))
+		if (!(out = (char*)malloc(sizeof(char) * ft_strlen(str) + 1)))
 			return (0);
 		out = ft_strcpy(out, str);
 		free(str);
@@ -68,15 +68,11 @@ static char			*expand_nbr(char *out, t_flags *flgs)
 	return (ret);
 }
 
-size_t				nbr_check_flags(t_flags *flgs, int nb, char *str)
+size_t				nbr_check_flags(t_flags *flgs, long long nb, char *str, char c)
 {
-	char	c;
 	int		len;
 	char	*ret;
 
-	c = 32;
-	flgs->zero == 1 ? c = 48 : 32;
-	flgs->left == 1 ? c = 32 : 48;
 	if ((len = flgs->decimal - ft_strlen(str)) > 0)
 	{
 		ret = expand_nbr(str, flgs);
@@ -104,31 +100,48 @@ size_t				nbr_check_flags(t_flags *flgs, int nb, char *str)
 	return (padd_nbr(ret, flgs, c));
 }
 
+char			*float_flgs(char *str, t_flags *flg)
+{
+	char	*res;
+
+	if (flg->decimal == 0 && flg->hash)
+		res = ft_strjoin_free(str, ".", 1);
+	else
+	{
+		res = ft_strdup(str);
+		ft_strdel(&str);
+	}
+	return (res);
+}
+
 static	size_t		float_nbr(va_list *list, t_flags *flg)
 {
 	double		f;
 	long double	d;
+	char		*str;
+	char		c;
 
+	c = 32;
+	c = flg->zero == 1 ? 48 : c;
+	c = flg->left == 1 ? 32 : c;
 	if (flg->lng_f)
 	{
 		d = va_arg(*list, long double);
-		return (nbr_check_flags(flg, (int)d, ft_ftoa(d, flg->decimal)));
-	}
-	else if (flg->l)
-	{
-		f = va_arg(*list, double);
-		return (nbr_check_flags(flg, (int)f, ft_ftoa(f, flg->decimal)));
+		str = float_flgs(ft_ftoa(d, flg->decimal), flg);
+		return (nbr_check_flags(flg, (long long)d, str, c));
 	}
 	else
 	{
 		f = va_arg(*list, double);
-		return (nbr_check_flags(flg, (int)f, ft_ftoa(f, flg->decimal)));
+		str = float_flgs(ft_ftoa(f, flg->decimal), flg);
+		return (nbr_check_flags(flg, (long long)f, str, c));
 	}
 }
 
 size_t				ft_convert(char *str, va_list *list, t_flags *flg)
 {
 	char	*ret;
+	char	c;
 
 	if (str[ft_strlen(str) - 1] == 's' || str[ft_strlen(str) - 1] == 'p' ||
 	str[ft_strlen(str) - 1] == 'c')
@@ -141,7 +154,8 @@ size_t				ft_convert(char *str, va_list *list, t_flags *flg)
 	else if (str[ft_strlen(str) - 1] == '%')
 	{
 		ret = ft_strcnew(1, '%');
-		return (padd_str(ret, flg, ' '));
+		c = flg->zero == 1 ? 48 : 32;
+		return (padd_str(ret, flg, c));
 	}
 	else
 		return (convert_oxx(str, list, flg));
