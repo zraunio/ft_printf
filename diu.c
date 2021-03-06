@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:45:46 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 11:06:17 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 13:10:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static size_t		decimal_nbr(va_list *list, t_flags *flg)
 
 	nb = 0;
 	s = 0;
-	if (flg->zero == 1 && flg->decimal != (size_t)-1)
-		flg->padd_c = 32;
 	if (flg->h)
 	{
 		if (flg->hh)
@@ -53,7 +51,7 @@ static size_t		decimal_nbr(va_list *list, t_flags *flg)
 			return (nbr_check_flags(flg, (long long)s, ft_itoa(s)));
 		}
 		else
-		{	
+		{
 			s = (short)va_arg(*list, int);
 			return (nbr_check_flags(flg, (long long)s, ft_itoa(s)));
 		}
@@ -93,8 +91,6 @@ static size_t		unsigned_nbr(va_list *list, t_flags *flg)
 
 	nb = 0;
 	s = 0;
-	if (flg->zero == 1 && flg->decimal != (size_t)-1)
-		flg->padd_c = 32;
 	if (flg->h)
 	{
 		s = (unsigned short)va_arg(*list, unsigned int);

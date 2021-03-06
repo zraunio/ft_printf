@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 11:32:28 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 10:32:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:22:29 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ char			*ft_itoa_base(long long int nb, long int base)
 	i = dig_count_base(nb, base);
 	if (nb < 0)
 		flg = 1;
-	if (!(res = ft_strnew(i)))
+	if (!(res = ft_strnew(i + 1)))
 		return (NULL);
-	res[i] = '\0';
+	res[i + 1] = '\0';
 	while (i >= flg)
 	{
 		tmp = nb % base;

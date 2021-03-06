@@ -6,13 +6,13 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 12:36:44 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 13:03:02 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t			padd_str(char *str, t_flags *flg)
+static size_t	padd_str(char *str, t_flags *flg)
 {
 	char	*pad;
 	char	*out;
@@ -78,7 +78,7 @@ static size_t	padd_char(int c, t_flags *flg)
 
 static size_t	prepend_ptr(char *str, t_flags *flg)
 {
-	char *out;	
+	char *out;
 
 	out = ft_strjoin_free("0x", str, 2);
 	return (padd_str(out, flg));

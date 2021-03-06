@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:39:01 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 09:49:13 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 17:44:43 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,35 @@ static size_t		octal_nbr(va_list *list, t_flags *flg)
 
 	u = va_arg(*list, size_t);
 	if (flg->h)
-		return (precision_base(ft_itoa_base((short)u, 8), flg, 'o'));
+		return (precision_base(ft_itoa_base((short)u, 8), flg));
 	else if (flg->l)
 	{
 		if (flg->ll)
-			return (precision_base(ft_lutoa_base((unsigned long long)u, 8), flg, 'o'));
+			return (precision_base(ft_lutoa_base((unsigned long long)u, 8),
+			flg));
 		else
 			return (precision_base(ft_lutoa_base((unsigned long)u, 8),
-			flg, 'o'));
+			flg));
 	}
 	else
-		return (precision_base(ft_itoa_base((unsigned int)u, 8), flg, 'o'));
+		return (precision_base(ft_itoa_base((unsigned int)u, 8), flg));
 }
 
-static char			*hex_convert(char *out, t_flags *flgs, char x)
+static char			*hex_convert(char *out, char x)
 {
 	size_t	i;
-	char	*ret;
 
 	i = 0;
-	ret = NULL;
-	if (ft_strcmp("0", out) == 0)
-		return (out);
-	else if (flgs->hash == 1 && x == 'x')
-		ret = ft_strjoin_free("0x", out, 2);
-	else if (flgs->hash == 1 && x == 'X')
-		ret = ft_strjoin_free("0X", out, 2);
-	else
-		ret = out;
 	if (x == 'X')
 	{
-		while (ret[i])
+		while (out[i])
 		{
-			if (ret[i] >= 'a' && ret[i] <= 'f')
-				ret[i] -= 32;
+			if (out[i] >= 'a' && out[i] <= 'f')
+				out[i] -= 32;
 			i++;
 		}
 	}
-	return (ret);
+	return (out);
 }
 
 static size_t		hex_nbr(va_list *list, t_flags *flg, char ex)
@@ -65,22 +56,23 @@ static size_t		hex_nbr(va_list *list, t_flags *flg, char ex)
 
 	x = va_arg(*list, unsigned long long int);
 	if (flg->h)
-		return (precision_base(ft_itoa_base((unsigned short)x, 16), flg, 'h'));
+		return (precision_base(ft_itoa_base((unsigned short)x, 16), flg));
 	else if (flg->l)
 	{
 		if (flg->ll)
 		{
 			str = ft_lutoa_base(x, 16);
-			return (precision_base(hex_convert(str, flg, ex), flg, 'h'));
+			return (precision_base(hex_convert(str, ex), flg));
 		}
 		else
 		{
 			str = ft_lutoa_base((unsigned long int)x, 16);
-			return (precision_base(hex_convert(str, flg, ex), flg, 'h'));
+			return (precision_base(hex_convert(str, ex), flg));
 		}
 	}
 	else
-		return (precision_base(hex_convert(ft_itoa_base((unsigned int)x, 16), flg, ex), flg, 'h'));
+		return (precision_base(hex_convert(ft_itoa_base((unsigned int)x, 16),
+		ex), flg));
 }
 
 size_t				convert_oxx(char *str, va_list *list, t_flags *flg)

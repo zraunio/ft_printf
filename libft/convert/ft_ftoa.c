@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:51:29 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 10:52:05 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 15:33:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char		*ft_ftoa(long double d, size_t decimal)
 			d += 1;
 	}
 	res = ft_litoa((long long)d);
+	if (d == 0 && (f * 10) < 0)
+		res = ft_strjoin_free("-", res, 2);
 	if (decimal > 0)
 		res = ft_decimal(res, d, decimal);
 	return (res);

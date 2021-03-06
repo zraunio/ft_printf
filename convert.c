@@ -6,13 +6,28 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:38:57 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 12:15:50 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 13:57:19 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t		padd_nbr(char *str, t_flags *flg)
+static char		*signed_nbr(char *pad, char *str, char c)
+{
+	char	*out;
+
+	if ((str[0] == '-' || str[0] == '+' || str[0] == ' ') && c == '0')
+	{
+		pad = ft_strjoin_free(ft_strcnew(1, str[0]), pad, 3);
+		out = ft_strjoin_free(pad, &str[1], 1);
+		ft_strdel(&str);
+	}
+	else
+		out = ft_strjoin_free(pad, str, 3);
+	return (out);
+}
+
+size_t			padd_nbr(char *str, t_flags *flg)
 {
 	char	*pad;
 	char	*out;
@@ -26,16 +41,7 @@ size_t		padd_nbr(char *str, t_flags *flg)
 		if (flg->left)
 			out = ft_strjoin_free(str, pad, 3);
 		else
-		{
-			if ((str[0] == '-' || str[0] == '+' || str[0] == ' ') && c == '0')
-			{
-				pad = ft_strjoin_free(ft_strcnew(1, str[0]), pad, 3);
-				out = ft_strjoin_free(pad, &str[1], 1);
-				free(str);
-			}
-			else
-				out = ft_strjoin_free(pad, str, 3);
-		}
+			out = signed_nbr(pad, str, c);
 	}
 	else
 	{
@@ -50,7 +56,7 @@ size_t		padd_nbr(char *str, t_flags *flg)
 	return (ret);
 }
 
-static char			*expand_nbr(char *out, t_flags *flgs)
+static char		*expand_nbr(char *out, t_flags *flgs)
 {
 	int		len;
 	char	*ret;
@@ -70,7 +76,7 @@ static char			*expand_nbr(char *out, t_flags *flgs)
 	return (ret);
 }
 
-size_t				nbr_check_flags(t_flags *flgs, long long nb, char *str)
+size_t			nbr_check_flags(t_flags *flgs, long long nb, char *str)
 {
 	int		len;
 	char	*ret;
@@ -84,15 +90,10 @@ size_t				nbr_check_flags(t_flags *flgs, long long nb, char *str)
 	else if (flgs->decimal == 0 && ft_strcmp("0", str) == 0)
 	{
 		ret = ft_strnew(0);
-		free(str);
+		ft_strdel(&str);
 	}
 	else
-	{
-		if (!(ret = (char*)malloc(sizeof(char) * ft_strlen(str))))
-			return (0);
-		ret = ft_strcpy(ret, str);
-		free(str);
-	}
+		ret = str;
 	if ((flgs->spc || flgs->sign) && nb >= 0 && flgs->cnvrsn != 'u')
 	{
 		if (flgs->sign)
@@ -103,7 +104,7 @@ size_t				nbr_check_flags(t_flags *flgs, long long nb, char *str)
 	return (padd_nbr(ret, flgs));
 }
 
-size_t				ft_convert(char *str, va_list *list, t_flags *flg)
+size_t			ft_convert(char *str, va_list *list, t_flags *flg)
 {
 	if (str[ft_strlen(str) - 1] == 's' || str[ft_strlen(str) - 1] == 'p' ||
 	str[ft_strlen(str) - 1] == 'c' || str[ft_strlen(str) - 1] == '%')
