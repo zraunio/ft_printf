@@ -6,19 +6,21 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/05 17:59:25 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:36:44 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t			padd_str(char *str, t_flags *flg, char c)
+static size_t			padd_str(char *str, t_flags *flg)
 {
 	char	*pad;
 	char	*out;
+	char	c;
 	size_t	len;
 
 	len = 0;
+	c = flg->padd_c;
 	out = ft_strdup(str);
 	if (flg->min_wi > ft_strlen(out))
 	{
@@ -63,36 +65,44 @@ static size_t	padd_char(int c, t_flags *flg)
 		{
 			ft_putchar(c);
 			ft_putstr(pad);
+			ft_strdel(&pad);
 			return (len + 1);
 		}
 		else
 			ft_putstr(pad);
-		free(pad);
+		ft_strdel(&pad);
 	}
 	ft_putchar(c);
 	return (len + 1);
 }
 
-static size_t	prepend_ptr(char *str, t_flags *flg, char c)
+static size_t	prepend_ptr(char *str, t_flags *flg)
 {
 	char *out;	
 
 	out = ft_strjoin_free("0x", str, 2);
-	return (padd_str(out, flg, c));
+	return (padd_str(out, flg));
 }
 
 size_t			convert_spc(char *str, va_list *list, t_flags *flg)
 {
 	char	*ret;
 
+	flg->padd_c = 32;
 	if (str[ft_strlen(str) - 1] == 's')
 	{
 		ret = handle_str(va_arg(*list, char *), flg);
-		return (padd_str(ret, flg, ' '));
+		return (padd_str(ret, flg));
 	}
 	else if (str[ft_strlen(str) - 1] == 'p')
 		return (prepend_ptr(ft_itoa_base(va_arg(*list, unsigned long), 16),
-		flg, ' '));
+		flg));
+	else if (str[ft_strlen(str) - 1] == '%')
+	{
+		ret = ft_strcnew(1, '%');
+		flg->padd_c = flg->zero == 1 ? 48 : 32;
+		return (padd_str(ret, flg));
+	}
 	else
 		return (padd_char((va_arg(*list, int)), flg));
 }

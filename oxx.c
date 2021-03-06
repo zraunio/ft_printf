@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:39:01 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/05 17:43:51 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 09:49:13 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 static size_t		octal_nbr(va_list *list, t_flags *flg)
 {
-	char		c;
 	size_t		u;
 
 	u = va_arg(*list, size_t);
-	c = 32;
-	c = flg->zero == 1 ? 48 : c;
-	c = flg->left == 1 ? 32 : c;
 	if (flg->h)
-		return (precision_base(ft_itoa_base((short)u, 8), flg, 'o', c));
+		return (precision_base(ft_itoa_base((short)u, 8), flg, 'o'));
 	else if (flg->l)
 	{
 		if (flg->ll)
-			return (precision_base(ft_lutoa_base((unsigned long long)u, 8), flg, 'o', c));
+			return (precision_base(ft_lutoa_base((unsigned long long)u, 8), flg, 'o'));
 		else
 			return (precision_base(ft_lutoa_base((unsigned long)u, 8),
-			flg, 'o', c));
+			flg, 'o'));
 	}
 	else
-		return (precision_base(ft_itoa_base((unsigned int)u, 8), flg, 'o', c));
+		return (precision_base(ft_itoa_base((unsigned int)u, 8), flg, 'o'));
 }
 
 static char			*hex_convert(char *out, t_flags *flgs, char x)
@@ -64,31 +60,27 @@ static char			*hex_convert(char *out, t_flags *flgs, char x)
 
 static size_t		hex_nbr(va_list *list, t_flags *flg, char ex)
 {
-	char					c;
 	char					*str;
 	unsigned long long int	x;
 
 	x = va_arg(*list, unsigned long long int);
-	c = 32;
-	c = flg->zero == 1 ? 48 : c;
-	c = flg->left == 1 ? 32 : c;
 	if (flg->h)
-		return (precision_base(ft_itoa_base((unsigned short)x, 16), flg, 'h', c));
+		return (precision_base(ft_itoa_base((unsigned short)x, 16), flg, 'h'));
 	else if (flg->l)
 	{
 		if (flg->ll)
 		{
 			str = ft_lutoa_base(x, 16);
-			return (precision_base(hex_convert(str, flg, ex), flg, 'h', c));
+			return (precision_base(hex_convert(str, flg, ex), flg, 'h'));
 		}
 		else
 		{
 			str = ft_lutoa_base((unsigned long int)x, 16);
-			return (precision_base(hex_convert(str, flg, ex), flg, 'h', c));
+			return (precision_base(hex_convert(str, flg, ex), flg, 'h'));
 		}
 	}
 	else
-		return (precision_base(hex_convert(ft_itoa_base((unsigned int)x, 16), flg, ex), flg, 'h', c));
+		return (precision_base(hex_convert(ft_itoa_base((unsigned int)x, 16), flg, ex), flg, 'h'));
 }
 
 size_t				convert_oxx(char *str, va_list *list, t_flags *flg)

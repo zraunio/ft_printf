@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:43 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/05 18:17:31 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 09:45:35 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ typedef struct	s_print
 	int			size;
 }				t_print;
 
+/*
+** vars - variables given in format; preci(sion) in char form
+** info_str - the content of "format" if % is present
+** arg: list of arguments using stdarg lib
+** size - data used for return value for ft_printf
+*/
+
 typedef struct	s_flags
 {
 	int		h;
@@ -37,25 +44,22 @@ typedef struct	s_flags
 	int		spc;
 	int		hash;
 	int		z;
+	char	padd_c;
+	char	cnvrsn;
 	size_t	decimal;
 	size_t	min_wi;
 }				t_flags;
 
-/*
-** vars - variables given in format; preci(sion) in char form
-** info_str - the content of "format" if % is present
-** arg: list of arguments using stdarg lib
-** size - data used for return value for ft_printf
-*/
-
 size_t			ft_convert(char *str, va_list *list, t_flags *flg);
 size_t			parse(char *str, va_list *list);
-size_t			padd_str(char *out, t_flags *flg, char c);
+size_t			padd_nbr(char *str, t_flags *flg);
 size_t			convert_oxx(char *str, va_list *list, t_flags *flg);
-size_t			precision_base(char *out, t_flags *flgs, char b, char c);
+size_t			precision_base(char *out, t_flags *flgs, char b);
 size_t			convert_diu(char *str, va_list *list, t_flags *flg);
 size_t			convert_spc(char *str, va_list *list, t_flags *flg);
-size_t			nbr_check_flags(t_flags *flgs, long long nb, char *str, char c);
+size_t			nbr_check_flags(t_flags *flgs, long long nb, char *str);
+size_t			float_nbr(va_list *list, t_flags *flg);
+size_t			ft_print(t_print *print);
 int				ft_printf(const char *format, ...);
 
 #endif

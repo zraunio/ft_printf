@@ -6,7 +6,7 @@
 #    By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/27 10:47:16 by zraunio           #+#    #+#              #
-#    Updated: 2021/03/05 19:34:54 by zraunio          ###   ########.fr        #
+#    Updated: 2021/03/06 09:32:26 by zraunio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ NAME = libftprintf.a
 
 TEST = ft_printf
 
-SRCS = 	convert.c \
-		ft_printf.c \
+SRCS = 	ft_printf.c \
+		print_split.c \
+		convert.c \
 		parse.c\
+		floats.c \
 		diu.c \
 		oxx.c \
 		print_oxx.c \
@@ -52,7 +54,7 @@ fclean: clean
 
 test: fclean
 	make -C libft
-	gcc -Wall -Wextra -Werror -g -fsanitize=address $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
+	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIBNAME) -x c $(MAINS) -I $(HDR) -o $(TEST)
 
 re: fclean all
 

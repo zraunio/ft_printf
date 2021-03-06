@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 10:37:14 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/03 16:00:14 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 09:31:10 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void		fill_struct(const char *str, t_flags *flgs)
 		str[i] == 'z' ? flgs->z = 1: 0;
 		i++;
 	}
+	flgs->cnvrsn = str[ft_strlen(str) - 1];
 }
 
 static void		reset_flags(t_flags *flgs)
@@ -94,6 +95,8 @@ static void		reset_flags(t_flags *flgs)
 	flgs->sign = 0;
 	flgs->spc = 0;
 	flgs->zero = 0;
+	flgs->padd_c = 0;
+	flgs->cnvrsn = 0;
 }
 
 size_t			parse(char *str, va_list *list)
@@ -107,6 +110,9 @@ size_t			parse(char *str, va_list *list)
 	fill_struct(str, flgs);
 	flgs->decimal = get_precision(str);
 	flgs->min_wi = get_min_width(str);
+	flgs->padd_c = 32;
+	flgs->padd_c = flgs->zero == 1 ? 48 : flgs->padd_c;
+	flgs->padd_c = flgs->left == 1 ? 32 : flgs->padd_c;
 	ret = ft_convert(str, list, flgs);
 	free(flgs);
 	return (ret);

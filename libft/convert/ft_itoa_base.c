@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 11:32:28 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/04 14:35:37 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 10:32:40 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int		ft_base(int nb)
 
 char			*ft_itoa_base(long long int nb, long int base)
 {
-	int						i;
-	int						flg;
-	char					*res;
+	int					i;
+	int					flg;
+	char				*res;
 	long long int		tmp;
 
 	i = 0;

@@ -6,23 +6,25 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 10:11:20 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/05 17:49:53 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 12:37:57 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 
-static size_t		padd_base(char *out, t_flags *flg, char b, char c)
+static size_t		padd_base(char *out, t_flags *flg, char b)
 {
 	char	*pad;
+	char	c;
 	size_t	ret;
 
+	c = flg->padd_c;
 	if (flg->min_wi > ft_strlen(out))
 	{
 		pad = ft_strcnew(flg->min_wi - ft_strlen(out), c);
 		if (flg->left)
-			out = ft_strjoin_free(out, pad, 2);
+			out = ft_strjoin_free(out, pad, 3);
 		else
 		{
 			if (out[0] == '0' && c == '0')
@@ -60,7 +62,7 @@ static char	*padd_hash(char *out, size_t len)
 	return (ret);
 }
 
-size_t		precision_base(char *out, t_flags *flgs, char b, char c)
+size_t		precision_base(char *out, t_flags *flgs, char b)
 {
 	int		len;
 	char	*ret;
@@ -68,14 +70,14 @@ size_t		precision_base(char *out, t_flags *flgs, char b, char c)
 	ret = NULL;
 	if (ft_strcmp("0", out) == 0)
 	{
-		c = flgs->decimal == 0 ? 32 : c;
+		flgs->padd_c = flgs->decimal == 0 ? 32 : flgs->padd_c;
 		if (flgs->decimal == 0)
 		{
 			free (out);
 			if (flgs->hash && b == 'o')
-				return (padd_base(ft_strcnew(1, '0'), flgs, b, c));
+				return (padd_base(ft_strcnew(1, '0'), flgs, b));
 			else
-				return (padd_base(ft_strcnew(1, '\0'), flgs, b, c));
+				return (padd_base(ft_strcnew(1, '\0'), flgs, b));
 		}
 	}
 	if (flgs->hash && out[0] != '0' && b == 'o')
@@ -94,5 +96,5 @@ size_t		precision_base(char *out, t_flags *flgs, char b, char c)
 	else
 		ret = ft_strdup(out);
 	ft_strdel(&out);
-	return (padd_base(ret, flgs, b, c));
+	return (padd_base(ret, flgs, b));
 }
