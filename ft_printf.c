@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:52:25 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 09:00:27 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 19:36:28 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int				ft_printf(const char *format, ...)
 	{
 		if (!(print = (t_print*)malloc(sizeof(t_print))))
 			return (0);
+		ft_memset(print, 0, sizeof(t_print));
 		va_start(arg, format);
 		print->arg = &arg;
 		print->info_str = ft_strdup(format);

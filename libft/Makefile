@@ -98,7 +98,7 @@ HDR_SRC= ./
 all: $(NAME)
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror -g $(SRC) -I $(HDR_SRC)
+	gcc -c -Wall -Wextra -Werror $(SRC) -I $(HDR_SRC)
 	mkdir $(OUT_DIR)
 	mv *.o $(OUT_DIR)
 	ar rc $(NAME) $(OUT_DIR)/*.o

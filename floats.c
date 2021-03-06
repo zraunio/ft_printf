@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 09:02:10 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 13:04:49 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 20:12:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ size_t				float_nbr(va_list *list, t_flags *flg)
 	long double	d;
 	char		*str;
 
+	f = 0;
+	d = 0;
 	if (flg->lng_f)
 	{
 		d = va_arg(*list, long double);

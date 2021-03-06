@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:24:38 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 13:03:02 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 19:21:26 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@ static size_t	padd_str(char *str, t_flags *flg)
 
 	len = 0;
 	c = flg->padd_c;
-	out = ft_strdup(str);
-	if (flg->min_wi > ft_strlen(out))
+	out = str;
+	if (flg->min_wi > ft_strlen(str))
 	{
-		pad = ft_strcnew(flg->min_wi - ft_strlen(out), c);
+		pad = ft_strcnew(flg->min_wi - ft_strlen(str), c);
 		if (flg->left)
-			out = ft_strjoin_free(out, pad, 3);
+			out = ft_strjoin_free(str, pad, 3);
 		else
-			out = ft_strjoin_free(pad, out, 3);
+			out = ft_strjoin_free(pad, str, 3);
 	}
 	ft_putstr(out);
 	len = ft_strlen(out);
 	free(out);
-	free(str);
 	return (len);
 }
 
@@ -46,7 +45,7 @@ static char		*handle_str(char *out, t_flags *flg)
 		ret = ft_strdup("(null)");
 	if (flg->decimal != (size_t)-1 && flg->decimal < ft_strlen(out))
 		ret = ft_strsub(out, 0, flg->decimal);
-	else if (!ret)
+	else if (ret == NULL)
 		ret = ft_strdup(out);
 	return (ret);
 }

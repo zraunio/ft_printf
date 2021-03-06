@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:07:07 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 17:50:40 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 20:12:17 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	test_multi(void)
 	char	*p = ft_strdup("our little secret");
 	char	*c = NULL;
 
-	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %s\nweeeee",
+	ft_printf("----MULTIPLE CONVERSIONS----\n");
+	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4f\n months at %x hours with %c%c%c others\n at %s\nweeeee",
 	"stranger", 34, 4.82749382382l, 1600, '\0', '\t', ' ', p);
-	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\n",
+	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4f\n months at %x hours with %c%c%c others\n at %p\n",
 	"stranger", 34, 4.82749382382, 1600, '\0', '\t', ' ', p);
-	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\n",
+	ft_printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4f\n months at %x hours with %c%c%c others\n at %p\n",
 	"stranger", 34, 4.82749382382, 1600, '\0', '\t', ' ', p);
 	ft_printf("\n----------\n");
 	ft_printf("%s%s%d%d", "string", NULL, 923, -8988);
@@ -44,6 +45,7 @@ void	test_decimal(void)
 	long long int	l = 4294967295;
 	unsigned long	ll = 8294967295;
 
+	ft_printf("----SIGNED INT----\n");
 	ft_printf("d&i w/ l\n%ld\n%li", d, i);
 	ft_printf("\n----------\n");
 	ft_printf("d&i w/ ll\n%lld\n%lli", l, l);
@@ -59,6 +61,7 @@ void	test_decimal(void)
 	ft_printf("%03.2d\n", 0);
 	ft_printf("%010.6d\n", 99);
 	ft_printf("\n----------\n");
+	ft_printf("----UNISGNED INT----\n");
 	ft_printf("u w/ l&ll\n%lu\n%llu", l, ll);
 	ft_printf("precision of .5 %.5u\nmin width of 40 %40u\n", l, l);
 	ft_printf("same with 0&+ %+0.5u\nthen with - and ' ' % -40u\n", l, l);
@@ -81,27 +84,35 @@ void	test_spc(void)
 	p = ft_strnew(3);
 	s = ft_strdup("and IIIIIIIIIIIiIIIII will aLLLLways\n");
 
+	ft_printf("----CHARS----\n");
 	ft_printf("hello |%c| that was a NULL char", 0);
 	ft_printf("\n----------\n");
 	ft_printf("hello |%c| that was another char", 123);
 	ft_printf("\n----------\n");
+	ft_printf("----STRINGS----");
 	ft_printf("this is s |%s|\n", s);
 	ft_printf("this is s with precision |%60s|\n", s);
 	ft_printf("this is s with '-' precision |%-60s|", s);
 	ft_printf("\n----------\n");
+	ft_printf("----POINTERS----\n");
 	ft_printf("this is p |%p|\nthis is p with precision |%20p|\nthis is p with '-' precision |%-20p|", p, p, p);
+	ft_printf("%-10p %10p %010p\n", s, s, s);
 	ft_printf("\n----------\n");
+	ft_printf("----HARDER SPC----\n");
 	ft_printf("111%s333%s555%saaa%sccc\n", "222", "444", "666", "bbb");
 	ft_printf("harder tests for %%.5s: '%.5s' %%s: '%s'\n%s\n%.100s\n", "adfghjklö", "asdfghjklö", 
 	"#saldka384972384edslnaclsalkc", "asdfg");
 	ft_printf("testing test_pointer %%p '%p'\n", NULL);
+	ft_printf("----THE %% CASE----");
 	ft_printf("percentage: '%%'\n %ll% %   % . %10%\n");
+	ft_printf("\n----------\n");
 	ft_memdel((void*)&p);
 	ft_memdel((void*)&s);
 }
 
 void	test_nondecimal(void)
 {
+	ft_printf("----HEAXADECIMAL----\n");
 	ft_printf("%lx\n", (unsigned long)4294967296);
 	ft_printf("%llX\n", (unsigned long long)4294967296);
 	ft_printf("%llx\n", (unsigned long long)9223372036854775807);
@@ -118,6 +129,7 @@ void	test_nondecimal(void)
 	ft_printf("X with 0 pad %07X\n" , 0);
 	ft_printf("X'-' %-7X\n", 0);
 	ft_printf("\n----------\n");
+	ft_printf("----OCTAL----");
 	ft_printf("%lo\n", (unsigned long)4294967296);
 	ft_printf("%llo\n", (unsigned long long)4294967296);
 	ft_printf("%llo\n", (unsigned long long)9223372036854775807);
@@ -126,7 +138,8 @@ void	test_nondecimal(void)
 	ft_printf("o with 0 pad %07o\n" , 0);
 	ft_printf("o '-' %-7o\n", 0);
 	ft_printf("\n----------\n");
-	ft_printf("16 '%%#1.5' '%#1.5o' '%1.5u' '%#1.5x' '%#1.5X'\n", 0, 0, 0, 0);
+	ft_printf("multi w/ 0: '%#1.5o' '%1.5u' '%#1.5x' '%#1.5X'\n", 0, 0, 0, 0);
+	ft_printf("\n----------\n");
 }
 
 void		test_double(void)
@@ -135,6 +148,7 @@ void		test_double(void)
 	long double	p = M_PI;
 	long double f = 923848294.009823832l;
 
+	ft_printf("----FLOATS----\n");
 	ft_printf("%lf\n", d);
 	ft_printf("%lf\n", d);
 	ft_printf("%lf", d);
@@ -160,15 +174,18 @@ void		test_double(void)
 	ft_printf("%.f\n", -99.5000);
 	ft_printf("%.f\n", -0.1000);
 	ft_printf("{%f}{%lf}{%Lf}\n", -1.42, -1.42, -1.42l);
+	ft_printf("\n----------\n");
 }
 
 int		main(void)
 {
-	test_multi();
-	test_decimal();
-	test_spc();
-	test_nondecimal();
-	test_double();
+//	test_multi();
+//	test_decimal();
+//	test_spc();
+//	test_nondecimal();
+//	test_double();
+	ft_printf("%.4f", 1);
+
 	//while (1);
 	return (0);
 }

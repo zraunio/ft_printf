@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:51:29 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 15:33:28 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 19:55:12 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char		*ft_ftoa(long double d, size_t decimal)
 	long double	f;
 
 	f = d - (long long)d;
+	res = NULL;
 	if (decimal == 0 && ft_long_abs((long long)(f * 10)) >= 5
 	&& (long long)d % 2 != 0)
 	{

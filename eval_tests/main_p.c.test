@@ -6,7 +6,7 @@
 /*   By: zraunio <zraunio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:07:07 by zraunio           #+#    #+#             */
-/*   Updated: 2021/03/06 18:02:58 by zraunio          ###   ########.fr       */
+/*   Updated: 2021/03/06 18:44:06 by zraunio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	test_multi(void)
 {
 	char	*p = ft_strdup("our little secret");
 	char	*c = NULL;
-
-	printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %s\nweeeee",
+	
+	printf("----MULTIPLE CONVERSIONS----");
+	printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4f\n months at %x hours with %c%c%c others\n at %s\nweeeee",
 	"stranger", 34, 4.82749382382l, 1600, '\0', '\t', ' ', p);
-	printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\n",
+	printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4f\n months at %x hours with %c%c%c others\n at %p\n",
 	"stranger", 34, 4.82749382382, 1600, '\0', '\t', ' ', p);
-	printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4Lf\n months at %x hours with %c%c%c others\n at %p\n",
+	printf("    hello %s, you are %3d years-old and i will kidnap you in\n %.4f\n months at %x hours with %c%c%c others\n at %p\n",
 	"stranger", 34, 4.82749382382, 1600, '\0', '\t', ' ', p);
 	printf("\n----------\n");
 	printf("%s%s%d%d", "string", NULL, 923, -8988);
@@ -43,6 +44,7 @@ void	test_decimal(void)
 	long long int	l = 4294967295;
 	unsigned long	ll = 8294967295;
 
+	printf("----SIGNED INT----");
 	printf("d&i w/ l\n%ld\n%li", d, i);
 	printf("\n----------\n");
 	printf("d&i w/ ll\n%lld\n%lli", l, l);
@@ -50,14 +52,15 @@ void	test_decimal(void)
 	printf("precision of .5 %.5d\nmin width of 40 %40d \n", i, i);
 	printf("same with 0&+ %+0.5i\nthen with - and ' ' % -40i \n", i, i);
 	for (s = 4310; s < 4334; s++)
-		printf("%hd\n", s);
+		ft_printf("%hd\n", s);
 	for (s = -4310; s > -4334; s--)
-		printf("%hd\n", s);
+		ft_printf("%hd\n", s);
 	printf("%03.2d\n", -1);
 	printf("%03.9d\n", 822);
 	printf("%03.2d\n", 0);
 	printf("%010.6d\n", 99);
 	printf("\n----------\n");
+	printf("----UNISGNED INT----");
 	printf("u w/ l&ll\n%lu\n%llu", l, ll);
 	printf("precision of .5 %.5u\nmin width of 40 %40u\n", l, l);
 	printf("same with 0&+ %+0.5u\nthen with - and ' ' % -40u\n", l, l);
@@ -80,20 +83,26 @@ void	test_spc(void)
 	p = ft_strnew(3);
 	s = ft_strdup("and IIIIIIIIIIIiIIIII will aLLLLways\n");
 
+	printf("----CHARS----");
 	printf("hello |%c| that was a NULL char", 0);
 	printf("\n----------\n");
 	printf("hello |%c| that was another char", 123);
 	printf("\n----------\n");
+	printf("----STRINGS----");
 	printf("this is s |%s|\n", s);
 	printf("this is s with precision |%60s|\n", s);
 	printf("this is s with '-' precision |%-60s|", s);
 	printf("\n----------\n");
+	printf("----POINTERS----");
 	printf("this is p |%p|\nthis is p with precision |%20p|\nthis is p with '-' precision |%-20p|", p, p, p);
+	printf("%-10p %10p %010p\n", s, s, s);
 	printf("\n----------\n");
+	printf("----HARDER SPC----");
 	printf("111%s333%s555%saaa%sccc\n", "222", "444", "666", "bbb");
 	printf("harder tests for %%.5s: '%.5s' %%s: '%s'\n%s\n%.100s\n", "adfghjklö", "asdfghjklö", 
 	"#saldka384972384edslnaclsalkc", "asdfg");
 	printf("testing test_pointer %%p '%p'\n", NULL);
+	printf("----THE %% CASE----");
 	printf("percentage: '%%'\n %ll% %   % . %10%\n");
 	ft_memdel((void*)&p);
 	ft_memdel((void*)&s);
@@ -101,6 +110,7 @@ void	test_spc(void)
 
 void	test_nondecimal(void)
 {
+	printf("----HEAXADECIMAL----");
 	printf("%lx\n", (unsigned long)4294967296);
 	printf("%llX\n", (unsigned long long)4294967296);
 	printf("%llx\n", (unsigned long long)9223372036854775807);
@@ -117,6 +127,7 @@ void	test_nondecimal(void)
 	printf("X with 0 pad %07X\n" , 0);
 	printf("X'-' %-7X\n", 0);
 	printf("\n----------\n");
+	printf("----OCTAL----");
 	printf("%lo\n", (unsigned long)4294967296);
 	printf("%llo\n", (unsigned long long)4294967296);
 	printf("%llo\n", (unsigned long long)9223372036854775807);
@@ -125,7 +136,7 @@ void	test_nondecimal(void)
 	printf("o with 0 pad %07o\n" , 0);
 	printf("o '-' %-7o\n", 0);
 	printf("\n----------\n");
-	printf("16 '%%#1.5' '%#1.5o' '%1.5u' '%#1.5x' '%#1.5X'\n", 0, 0, 0, 0);
+	printf("multi w/ 0: '%#1.5o' '%1.5u' '%#1.5x' '%#1.5X'\n", 0, 0, 0, 0);
 }
 
 void		test_double(void)
@@ -134,6 +145,7 @@ void		test_double(void)
 	long double	p = M_PI;
 	long double f = 923848294.009823832l;
 
+	printf("----FLOATS----");
 	printf("%lf\n", d);
 	printf("%lf\n", d);
 	printf("%lf", d);
@@ -171,7 +183,3 @@ int		main(void)
 	//while (1);
 	return (0);
 }
-//gcc -Wall -Wextra -Werror libft/libft.a -I libft/ -x c eval_tests/main_p.c.test -o test
-//gcc -Wall -Wextra -Werror main.c -L./ -lftprintf -I./ -L libft/ -lft  -o test
-//-fsanitize=address
-//valgrind --leak-check=yes --track-origins=yes
